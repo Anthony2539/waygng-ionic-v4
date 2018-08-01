@@ -1,0 +1,50 @@
+{
+    "TITLE": {
+        "TIMETABLE": "Horaires",
+        "FAVORIS": "Favoris",
+        "TRAFFIC_INFO": "Info trafic",
+        "SPOTS": "Spots",
+        "SEND_SPOT": "Envoyer un spot",
+        "THEY_LIKED": "Ils ont aimé",
+        "PROFILE": "Profil",
+        "SPOT": "Spot",
+        "NOTIFICATIONS": "Notifications",
+        "MAP":"À proximité",
+        "LOGIN": "Bienvenue",
+        "PRICE": "Tarif"
+    },
+
+    "MENU":{
+        "TIMETABLE": "Horaires",
+        "FAVORIS": "Favoris",
+        "TRAFFIC_INFO": "Info trafic",
+        "SPOTS": "Spots",
+        "NOTIFICATIONS": "Notifications",
+        "MAP":"À proximité",
+        "PRICE_TRANSPORT" : "Tarif"
+    },
+    "WARNING":{
+        "NOT_CONNECTED_FAV":"Veuillez vous connecter pour accéder aux favoris",
+        "EMPTY_FAV":"Aucune station en favoris",
+        "NO_PLANNED_PASSAGE":"Aucun passage prévu à cette station dans l'heure qui vient",
+        "NOT_CONNECTED_SPOT":"Veuillez vous connecter pour accéder aux spots",
+        "EMPTY_SPOT":"Aucun spot",
+        "NOT_CONNECTED_NOTIF": "Veuillez vous connecter pour accéder aux notifications",
+        "EMPTY_NOTIF":"Aucune notification",
+        "SEARCH_TIMETABLE": "Recherchez une station pour afficher les prochains passages",
+        "LAST_UPDATE": "Dernière mise à jour",
+        "NO_STATION_NEARBY": "Aucune station à proximité",
+        "NO_USER_SHARE_STATION":"Aucune personne ne partage cette station"
+    },
+    "REFRESHING": "Chargement...",
+    "NEAREST_STATION": "Stations les plus proches",
+    "SEARCH_STATION": "Recherche une station",
+    "CHOOSE_STATION": "Sélectionnez une station",
+    "STATIONS": "Stations",
+    "STATION": "Station",
+    "ERROR_IMPOSSIBLE_REFRESH": "Impossible d'actualiser. Merci de réessayer.",
+    "ERROR_IMPOSSIBLE_POSITION": "Impossible de charger votre position. Merci d'activer votre localisation.",
+    "REMOVED_FAVORITES": "supprimé des favoris !",
+    "ADDED_FAVORITES": "ajouté aux favoris !",
+    "CANCEL": "Annuler"
+}

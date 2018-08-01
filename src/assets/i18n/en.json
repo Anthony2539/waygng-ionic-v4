@@ -1,0 +1,50 @@
+{
+    "TITLE": {
+        "TIMETABLE": "Timetables",
+        "FAVORIS": "Favourites",
+        "TRAFFIC_INFO": "Traffic info",
+        "SPOTS": "Spots",
+        "SEND_SPOT": "Send spot",
+        "THEY_LIKED": "They liked",
+        "PROFILE": "Profile",
+        "SPOT": "Spot",
+        "NOTIFICATIONS": "Notifications",
+        "MAP":"Nearby",
+        "LOGIN": "Welcome",
+        "PRICE": "Price"
+    },
+
+    "MENU":{
+        "TIMETABLE": "Timetables",
+        "FAVORIS": "Favorites",
+        "TRAFFIC_INFO": "Traffic info",
+        "SPOTS": "Spots",
+        "NOTIFICATIONS": "Notifications",
+        "MAP":"Nearby",
+        "PRICE_TRANSPORT" : "Price"
+    },
+    "WARNING":{
+        "NOT_CONNECTED_FAV":"Please login to access favorites",
+        "EMPTY_FAV":"No favorite station",
+        "NO_PLANNED_PASSAGE":"No scheduled passage at this station in the coming hour",
+        "NOT_CONNECTED_SPOT":"Please login to access spots",
+        "EMPTY_SPOT":"No spot",
+        "NOT_CONNECTED_NOTIF": "Please login to access notifications",
+        "EMPTY_NOTIF":"No notification",
+        "SEARCH_TIMETABLE": "Search station to show next",
+        "LAST_UPDATE": "Last update",
+        "NO_STATION_NEARBY": "No station nearby",
+        "NO_USER_SHARE_STATION":"No one is sharing this station"
+    },
+    "REFRESHING": "Loading...",
+    "NEAREST_STATION": "Nearest stations",
+    "SEARCH_STATION": "Search station",
+    "CHOOSE_STATION": "Choose a station",
+    "STATIONS": "Stations",
+    "STATION": "Station",
+    "ERROR_IMPOSSIBLE_REFRESH": "Can not refresh. Please try again.",
+    "ERROR_IMPOSSIBLE_POSITION": "Can not load your position. Please enable localization.",
+    "REMOVED_FAVORITES": "removed from favorites !",
+    "ADDED_FAVORITES": "added from favorites !",
+    "CANCEL": "Cancel"
+}

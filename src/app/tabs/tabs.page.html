@@ -1,11 +1,18 @@
 <ion-tabs>
-  <ion-tab label="Home" icon="home" href="/tabs/(home:home)">
+  <ion-tab icon="md-alarm" href="/tabs/(home:home)">
     <ion-router-outlet name="home"></ion-router-outlet>
   </ion-tab>
-  <ion-tab label="About" icon="information-circle" href="/tabs/(about:about)">
-    <ion-router-outlet name="about"></ion-router-outlet>
+  <ion-tab icon="ios-search" href="/tabs/(search:search)">
+    <ion-router-outlet name="search"></ion-router-outlet>
   </ion-tab>
-  <ion-tab label="Contact" icon="contacts" href="/tabs/(contact:contact)">
-    <ion-router-outlet name="contact"></ion-router-outlet>
+  <ion-tab icon="md-navigate" href="/tabs/(map:map)">
+    <ion-router-outlet name="map"></ion-router-outlet>
+  </ion-tab>
+  <ion-tab icon="information-circle" href="/tabs/(info:info)">
+    <ion-router-outlet name="info"></ion-router-outlet>
+  </ion-tab>
+  <ion-tab icon="logo-euro" href="/tabs/(tarif:tarif)">
+    <ion-router-outlet name="tarif"></ion-router-outlet>
   </ion-tab>
 </ion-tabs>
+

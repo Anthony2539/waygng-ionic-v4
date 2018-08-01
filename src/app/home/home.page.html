@@ -1,10 +1,30 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Home</ion-title>
+    <ion-title>{{ 'STATION' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>If you get lost, the <a target="_blank" href="https://ionicframework.com/docs">docs</a> will be your guide.</p>
+<ion-content>
+  <ion-list class="noBottomMargin">
+    <ion-list-header color="light">
+      <ion-icon name="star"></ion-icon>&nbsp;&nbsp;{{ 'FAVORIS' | translate }}
+    </ion-list-header>
+    <ion-row *ngIf="favoris?.length==0 && !loadFavoris" class="warning-container">
+      <ion-col col-12>
+          {{ 'WARNING.EMPTY_FAV' | translate }}
+      </ion-col>
+    </ion-row>
+
+        <ion-item-sliding *ngFor="let fav of favoris">
+            <button ion-item (click)="itemSelected(fav)">
+                <ion-icon name="pin" item-start></ion-icon>
+                {{fav.name}}          
+            </button>
+            <ion-item-options side="right">
+                <button color="danger" ion-button icon-only (click)="removeFavoris(fav)">
+                    <ion-icon name="ios-trash-outline"></ion-icon>
+                </button>
+            </ion-item-options>
+        </ion-item-sliding>
+  </ion-list>
 </ion-content>
