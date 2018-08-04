@@ -1,4 +1,6 @@
-export class TempsAttente {
+import { Station } from "./station";
+
+export class TempsAttenteFav {
     idArret: string;
     idLigne:  string;
     numLignePublic: string;
@@ -6,14 +8,9 @@ export class TempsAttente {
     couleurTexte: string;
     sensAller: boolean;
     destination: string;
-    precisionDestination: string;
-    temps: string;
-    fiable: boolean;
-    numVehicule: string;
-    latitude: number;
-    longitude: number;
-    lstTemps: string[];
-    isInfavoris?: boolean;
+    temps?: string;
+    station:Station;
+
 
     constructor(values: Object = {}) {
         Object.assign(this, values);

@@ -4,6 +4,9 @@ import { Station } from '../station';
 import { GinkoService } from '../ginko.service';
 import { TempsAttente } from '../temps-attente';
 import { MyToastComponent } from '../components/my-toast/my-toast.component';
+import { TempsAttenteFav } from '../temps-attente-fav';
+import { FavorisService } from '../favoris.service';
+import { take } from '../../../node_modules/rxjs/operators';
 
 @Component({
   selector: 'app-station',
@@ -17,8 +20,12 @@ export class StationPage implements OnInit {
   listeTemps: TempsAttente[] = [];
   nomExact: string;
   dateLastUpdate: number;
+  isInfavoris:boolean = false;
 
-  constructor(private route: ActivatedRoute, private ginkoService: GinkoService, public myToast: MyToastComponent) { }
+  constructor(private route: ActivatedRoute, 
+              private ginkoService: GinkoService, 
+              private favorisService: FavorisService,
+              public myToast: MyToastComponent) { }
 
   ngOnInit() {
 
@@ -28,7 +35,7 @@ export class StationPage implements OnInit {
 
   fetchStationTemps(refresher?){
     if(this.station){
-      //this.checkIfInFavoris();
+      this.checkIfInFavoris();
       this.listeTemps = [];
       this.loading = true;
       this.ginkoService.fetchTempsLieu(this.station.name).subscribe((stationAttente) => {
@@ -74,6 +81,62 @@ export class StationPage implements OnInit {
       }
     );
   }
+}
+ 
+
+checkIfInFavoris(){
+  this.favorisService.getFavoris(this.station.name).valueChanges().pipe(take(1)).subscribe(stations => {
+    if(stations && stations.length > 0){
+      this.isInfavoris = true;
+    }else{
+      this.isInfavoris = false;
+    }
+  });
+}
+
+
+eventFavoris(tempsAttente:TempsAttente){
+  if(tempsAttente){
+    let tempsAttenteFav: TempsAttenteFav = {
+      idArret: tempsAttente.idArret,
+      idLigne: tempsAttente.idLigne,
+      sensAller: tempsAttente.sensAller,
+      destination: tempsAttente.destination,
+      numLignePublic: tempsAttente.numLignePublic,
+      couleurFond: tempsAttente.couleurFond,
+      couleurTexte: tempsAttente.couleurTexte,
+      station:{
+        id:this.station.id,
+        name:this.station.name,
+        latitude:this.station.latitude,
+        longitude:this.station.longitude
+      }
+
+    }
+
+    if(tempsAttente.isInfavoris){
+      tempsAttente.isInfavoris = false;
+      this.favorisService.removeFavorisTempsAttente(tempsAttenteFav);
+      this.myToast.createToast('REMOVED_FAVORITES','bottom',tempsAttenteFav.destination);
+    }else{
+      tempsAttente.isInfavoris = true;
+      this.favorisService.addFavorisTempsAttente(tempsAttenteFav);
+      this.myToast.createToast('ADDED_FAVORITES','bottom',tempsAttenteFav.destination);
+    }
+
+  }else{
+    if(this.isInfavoris){
+      this.isInfavoris = false;
+      this.favorisService.removeFavoris(this.nomExact);
+      this.myToast.createToast('REMOVED_FAVORITES','bottom',this.nomExact);
+    }else{
+      this.isInfavoris = true;
+      this.favorisService.addFavoris(this.station).then(() => {
+        this.myToast.createToast('ADDED_FAVORITES','bottom',this.nomExact);
+      })
+    }
+  }
+
 }
 
 }

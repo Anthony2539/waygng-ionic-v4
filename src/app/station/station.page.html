@@ -9,33 +9,34 @@
 
 <ion-content>
 
+    <ion-fab *ngIf="!atBottom" vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button color="primary" (click)="eventFavoris()">
+            <ion-icon [color]="isInfavoris ? 'tertiary' : 'dark'" [name]="isInfavoris ? 'ios-star' : 'ios-star-outline'"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+
     <ion-list *ngIf="station">
         <ion-list-header color="light">
             {{ 'WARNING.LAST_UPDATE' | translate }} {{dateLastUpdate | formatDate:'calendar'}}
             <my-header-loader *ngIf="loading && station"></my-header-loader>
           </ion-list-header>
-          <ion-row *ngIf="!loading && station && listeTemps.length == 0" class="warning-container">
-              <ion-col col-12>
-                  {{'WARNING.NO_PLANNED_PASSAGE' | translate }}
-              </ion-col>
-          </ion-row> 
+          <div *ngIf="!loading && station && listeTemps.length == 0"class="warning-container">{{ 'WARNING.NO_PLANNED_PASSAGE' | translate }}</div>
+
           <div class="tempsAttenteContainer" *ngFor="let tempsAttente of listeTemps">
-            <ion-item>
-              <ion-thumbnail item-start class="numLigne" style.color="#{{tempsAttente.couleurTexte}}" style.background-color="#{{tempsAttente.couleurFond}}">
-                {{tempsAttente.numLignePublic}}
-              </ion-thumbnail>
-              <h3>{{tempsAttente.destination}}</h3>
-              <p>{{tempsAttente.precisionDestination}}</p>
-              <button item-end ion-button icon-only clear (click)="eventFavoris(tempsAttente)">
-                  <ion-icon [color]="tempsAttente.isInfavoris ? 'yellown' : 'dark'" [name]="tempsAttente.isInfavoris ? 'ios-star' : 'ios-star-outline'"></ion-icon>
-              </button>
+            <ion-item no-padding lines="none">
+                <ion-thumbnail slot="start" class="numLigne"  style.color="#{{tempsAttente.couleurTexte}}" style.background-color="#{{tempsAttente.couleurFond}}">
+                    {{tempsAttente.numLignePublic}}
+                </ion-thumbnail>
+                <ion-label text-wrap>
+                    <h3>{{tempsAttente.destination}}</h3>
+                    <p>{{tempsAttente.precisionDestination}}</p>
+                </ion-label>
+                <ion-icon name="star-outline"></ion-icon>
             </ion-item>
-            <ion-item>
             <div class="timeContainer">
                 <div class="time" *ngFor="let time of tempsAttente.lstTemps">{{time}}</div>
-              </div>
-            </ion-item>
-          </div> 
+            </div>
+          </div>
     </ion-list>
 
 </ion-content>
