@@ -1,30 +1,26 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>{{ 'STATION' | translate }}</ion-title>
+  <ion-toolbar color="primary">
+      <ion-searchbar placeholder="{{ 'STATION' | translate }}" routerLink="/search"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list class="noBottomMargin">
+  <ion-list no-margin>
     <ion-list-header color="light">
-      <ion-icon name="star"></ion-icon>&nbsp;&nbsp;{{ 'FAVORIS' | translate }}
+      <ion-icon name="star"></ion-icon><ion-label padding-start>{{ 'FAVORIS' | translate }}</ion-label>
     </ion-list-header>
-    <ion-row *ngIf="favoris?.length==0 && !loadFavoris" class="warning-container">
-      <ion-col col-12>
-          {{ 'WARNING.EMPTY_FAV' | translate }}
-      </ion-col>
-    </ion-row>
+    <div *ngIf="favoris?.length==0 && !loadFavoris" class="warning-container">{{ 'WARNING.EMPTY_FAV' | translate }}</div>
 
-        <ion-item-sliding *ngFor="let fav of favoris">
-            <button ion-item (click)="itemSelected(fav)">
-                <ion-icon name="pin" item-start></ion-icon>
-                {{fav.name}}          
-            </button>
-            <ion-item-options side="right">
-                <button color="danger" ion-button icon-only (click)="removeFavoris(fav)">
-                    <ion-icon name="ios-trash-outline"></ion-icon>
-                </button>
-            </ion-item-options>
-        </ion-item-sliding>
+    <ion-item-sliding *ngFor="let fav of favoris">
+        <ion-item>
+          <ion-icon name="pin" item-start></ion-icon>
+          <ion-label padding-start>{{fav.name}} </ion-label>
+        </ion-item>    
+        <ion-item-options side="end">
+            <ion-item-option color="danger" onclick="removeFavoris(fav)">
+                <ion-icon slot="icon-only" name="trash"></ion-icon>
+            </ion-item-option>
+        </ion-item-options>
+    </ion-item-sliding>
   </ion-list>
 </ion-content>

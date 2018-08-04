@@ -1,0 +1,52 @@
+.numLigne{
+    text-align: center;
+    font-weight: bold;
+    border-radius: 2px;
+    padding: 0px !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    min-height: 40px;
+}
+
+
+.noBottomMargin{
+    margin-bottom: 5px;
+}
+
+.fab-bottom{
+    bottom:10px !important;
+}
+
+.tempsAttenteContainer .item-inner{
+    border: none !important;
+} 
+
+.tempsAttenteContainer .label{
+    margin: 0px !important;
+} 
+
+.timeContainer{
+    display: flex;
+    flex-direction: row;
+}
+
+.time{
+    flex: 1 1 auto;
+    text-align: center;
+    background: #88b7d5;
+    border: 1px solid #c2e1f5;
+    padding: 5px;
+}
+
+.time:first-child{
+    font-weight: bold;
+    border-bottom-left-radius: 2px;
+    border-top-left-radius: 2px;
+}
+
+.time:last-child{
+    border-bottom-right-radius: 2px;
+    border-top-right-radius: 2px;
+}

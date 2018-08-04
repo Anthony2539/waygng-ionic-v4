@@ -4,8 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
-
+import { TranslateModule } from '@ngx-translate/core';
 import { StationPage } from './station.page';
+import { ComponentsModule } from '../components/components.module';
+import { FormatDatePipe } from '../pipe/format-date.pipe';
 
 const routes: Routes = [
   {
@@ -19,8 +21,10 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    ComponentsModule,
+    TranslateModule.forChild(),
     RouterModule.forChild(routes)
   ],
-  declarations: [StationPage]
+  declarations: [StationPage, FormatDatePipe]
 })
 export class StationPageModule {}

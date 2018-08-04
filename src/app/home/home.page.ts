@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { FavorisService } from '../favoris.service';
-import * as firebase from 'firebase/app';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +16,7 @@ export class HomePage {
   constructor(
     public auth: AuthService,
     public favorisService: FavorisService) {
-
+      this.getFavoris();
 
 }
 

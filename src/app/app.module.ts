@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule, RouteReuseStrategy } from '@angular/router';
+import { RouteReuseStrategy } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader'; 
-import { TranslateModule, TranslateLoader } from '../../node_modules/@ngx-translate/core';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpModule } from '@angular/http';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -12,6 +12,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
 
 import { FIREBASE_CONFIG } from './app.firebase.config';
 
@@ -22,6 +23,10 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AuthService } from './auth.service';
 import { FavorisService } from './favoris.service';
+import { GinkoService } from './ginko.service';
+import { MyToastComponent } from './components/my-toast/my-toast.component';
+import { FormatDatePipe } from './pipe/format-date.pipe';
+
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -33,6 +38,7 @@ export function createTranslateLoader(http: HttpClient) {
   entryComponents: [],
   imports: [
             BrowserModule, 
+            HttpModule,
             HttpClientModule,
             IonicModule.forRoot(), 
             TranslateModule.forRoot({
@@ -53,6 +59,8 @@ export function createTranslateLoader(http: HttpClient) {
     SplashScreen,
     AuthService,
     FavorisService,
+    GinkoService,
+    MyToastComponent,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

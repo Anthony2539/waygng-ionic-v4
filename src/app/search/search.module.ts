@@ -6,6 +6,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { SearchPage } from './search.page';
+import { TranslateModule } from '@ngx-translate/core';
+import { ComponentsModule } from '../components/components.module';
+import { RemoveDuplicateStationPipe } from '../pipe/remove-duplicate-station.pipe';
 
 const routes: Routes = [
   {
@@ -14,13 +17,15 @@ const routes: Routes = [
   }
 ];
 
-@NgModule({
+@NgModule({ 
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    ComponentsModule,
+    TranslateModule.forChild(),
     RouterModule.forChild(routes)
   ],
-  declarations: [SearchPage]
+  declarations: [SearchPage, RemoveDuplicateStationPipe]
 })
 export class SearchPageModule {}
