@@ -48,7 +48,7 @@ export class SearchPage implements OnInit {
   }
 
   itemSelected(station){
-    this.router.navigate(['station'], { queryParams: station});
+    this.router.navigate(['station'], {queryParams: station});
   }
 
 }

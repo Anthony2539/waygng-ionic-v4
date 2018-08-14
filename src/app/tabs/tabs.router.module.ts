@@ -44,11 +44,6 @@ const routes: Routes = [
     path: '',
     redirectTo: '/tabs/(home:home)',
     pathMatch: 'full'
-  },
-  {
-    path: 'search',
-    redirectTo: '/tabs/(search:search)',
-    pathMatch: 'full'
   }
 ];
 

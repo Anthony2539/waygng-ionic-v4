@@ -42,7 +42,7 @@ export function createTranslateLoader(http: HttpClient) {
             BrowserModule, 
             HttpModule,
             HttpClientModule,
-            IonicModule.forRoot(), 
+            IonicModule.forRoot(),  
             TranslateModule.forRoot({
               loader: {
                 provide: TranslateLoader,

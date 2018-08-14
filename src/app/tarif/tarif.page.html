@@ -1,9 +1,43 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>tarif</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title>{{ 'TITLE.PRICE' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
+
+    <my-loader *ngIf="loading"></my-loader>
+
+    <ion-list lines="none">
+
+        <ion-card *ngFor="let tarif of listeTarif">
+
+          <ion-item no-padding color="light">
+
+
+            <ion-card-header>
+                <ion-card-title style="font-size: 14px">{{tarif.libelle}}</ion-card-title>
+                <ion-card-subtitle>({{tarif.type | formatTypeTransport}})</ion-card-subtitle>
+            </ion-card-header>
+
+            <ion-item  no-padding slot="end"> 
+                <ion-label>
+                    {{tarif.tarif}}
+                </ion-label>
+                <ion-icon name="logo-euro" size="small"></ion-icon>
+              </ion-item>
+          </ion-item>
+        
+        
+          <ion-card-content>
+            <p>
+              <b>{{tarif.description}}</b>
+            </p>
+            <p> <ion-icon name="pin" class="logo-pin"> </ion-icon>{{tarif.pointsDeVente}}</p>
+          </ion-card-content>
+        
+        
+        </ion-card>
+      </ion-list>
 
 </ion-content>

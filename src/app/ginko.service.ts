@@ -149,7 +149,8 @@ export class GinkoService {
         .get<any>(url)
         .pipe(
             map(response => {
-            return response.json().objets;
+                var data = response.objets;
+            return data;
         })
     )
   }

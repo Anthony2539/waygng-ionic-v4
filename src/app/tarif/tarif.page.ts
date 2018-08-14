@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Tarif } from '../tarif';
+import { GinkoService } from '../ginko.service';
+import { MyToastComponent } from '../components/my-toast/my-toast.component';
 
 @Component({
   selector: 'app-tarif',
@@ -7,9 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TarifPage implements OnInit {
 
-  constructor() { }
+  loading: boolean = false;
+  listeTarif: Tarif[] = [];
+
+  constructor(private ginkoService:GinkoService, public myToast: MyToastComponent) { }
 
   ngOnInit() {
-  }
+
+      this.loading = true;
+      this.ginkoService.fetchTitreTransport().subscribe((tarifs) =>{
+        this.listeTarif = tarifs;
+        this.loading = false;
+      },
+      (err) => {
+        this.loading = false;
+        this.myToast.createToast("ERROR_IMPOSSIBLE_REFRESH", 'top');
+      });
+    }
 
 }
