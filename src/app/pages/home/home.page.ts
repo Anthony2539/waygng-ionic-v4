@@ -16,11 +16,13 @@ export class HomePage {
   constructor(
     public auth: AuthService,
     public favorisService: FavorisService) {
-      this.getFavoris();
+
 
 }
 
-
+  ngOnInit() {
+    this.getFavoris();
+  }
 
   getFavoris(){
     this.loadFavoris = true;
