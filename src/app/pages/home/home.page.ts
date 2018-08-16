@@ -24,21 +24,9 @@ export class HomePage {
 
   getFavoris(){
     this.loadFavoris = true;
-    const unsubscribe: firebase.Unsubscribe = firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        this.favorisService.getFavorisList().valueChanges().subscribe((favoris) => {
-          this.favoris = favoris;
-        }); 
-
-        //this.getFavorisTempsAttente(null);
-
-        unsubscribe();
-      } else {
-        this.auth.createAnonymousUser();
-        unsubscribe();
-      }
-   }); 
-
+    this.favorisService.getFavorisList().valueChanges().subscribe((favoris) => {
+      this.favoris = favoris;
+    }); 
   }
 
 }
