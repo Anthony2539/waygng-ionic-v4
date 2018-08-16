@@ -6,5 +6,5 @@ export class InfoLigne {
 
     constructor(values: Object = {}) {
         Object.assign(this, values);
-    }
+    } 
 } 
