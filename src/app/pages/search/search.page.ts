@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Station } from '../station';
-import { GinkoService } from '../ginko.service';
+import { Station } from '../../models/station';
+import { GinkoService } from '../../services/ginko.service';
 
 @Component({
   selector: 'app-search',

@@ -21,11 +21,6 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
-
-
-import { AuthService } from './auth.service';
-import { FavorisService } from './favoris.service';
-import { GinkoService } from './ginko.service';
 import { MyToastComponent } from './components/my-toast/my-toast.component';
 import { Globalization } from '@ionic-native/globalization/ngx';
 
@@ -59,9 +54,6 @@ export function createTranslateLoader(http: HttpClient) {
   providers: [
     StatusBar,
     SplashScreen,
-    AuthService,
-    FavorisService,
-    GinkoService,
     MyToastComponent,
     Globalization,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }

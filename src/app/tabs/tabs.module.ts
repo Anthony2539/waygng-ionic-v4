@@ -7,11 +7,11 @@ import { FormsModule } from '@angular/forms';
 import { TabsPageRoutingModule } from './tabs.router.module';
 
 import { TabsPage } from './tabs.page';
-import { HomePageModule } from '../home/home.module';
-import { SearchPageModule } from '../search/search.module';
-import { MapPageModule } from '../map/map.module';
-import { InfoPageModule } from '../info/info.module';
-import { TarifPageModule } from '../tarif/tarif.module';
+import { HomePageModule } from '../pages/home/home.module';
+import { SearchPageModule } from '../pages/search/search.module';
+import { MapPageModule } from '../pages/map/map.module';
+import { InfoPageModule } from '../pages/info/info.module';
+import { TarifPageModule } from '../pages/tarif/tarif.module';
 
 @NgModule({
   imports: [

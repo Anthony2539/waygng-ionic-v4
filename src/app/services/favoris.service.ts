@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
 import { AuthService } from './auth.service';
-import { Station } from './station';
-import { take } from '../../node_modules/rxjs/operators';
-import { TempsAttenteFav } from './temps-attente-fav';
+import { Station } from '../models/station';
+import { TempsAttenteFav } from '../models/temps-attente-fav';
+import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'

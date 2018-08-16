@@ -6,9 +6,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { TarifPage } from './tarif.page';
-import { ComponentsModule } from '../components/components.module';
 import { TranslateModule } from '@ngx-translate/core';
-import { FormatTypeTransportPipe } from '../pipe/format-type-transport.pipe';
+import { ComponentsModule } from '../../components/components.module';
+import { FormatTypeTransportPipe } from '../../pipe/format-type-transport.pipe';
+
 
 const routes: Routes = [
   {

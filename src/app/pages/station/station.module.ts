@@ -4,20 +4,19 @@ import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
-
-import { SearchPage } from './search.page';
 import { TranslateModule } from '@ngx-translate/core';
-import { ComponentsModule } from '../components/components.module';
-import { RemoveDuplicateStationPipe } from '../pipe/remove-duplicate-station.pipe';
+import { StationPage } from './station.page';
+import { ComponentsModule } from '../../components/components.module';
+import { FormatDatePipe } from '../../pipe/format-date.pipe';
 
 const routes: Routes = [
   {
     path: '',
-    component: SearchPage
+    component: StationPage
   }
 ];
 
-@NgModule({ 
+@NgModule({
   imports: [
     CommonModule,
     FormsModule,
@@ -26,6 +25,6 @@ const routes: Routes = [
     TranslateModule.forChild(),
     RouterModule.forChild(routes)
   ],
-  declarations: [SearchPage, RemoveDuplicateStationPipe]
+  declarations: [StationPage, FormatDatePipe]
 })
-export class SearchPageModule {}
+export class StationPageModule {}

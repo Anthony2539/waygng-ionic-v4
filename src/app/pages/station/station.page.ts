@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Station } from '../station';
-import { GinkoService } from '../ginko.service';
-import { TempsAttente } from '../temps-attente';
-import { MyToastComponent } from '../components/my-toast/my-toast.component';
-import { TempsAttenteFav } from '../temps-attente-fav';
-import { FavorisService } from '../favoris.service';
-import { take } from '../../../node_modules/rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
+import { Station } from '../../models/station';
+import { GinkoService } from '../../services/ginko.service';
+import { TempsAttente } from '../../models/temps-attente';
+import { MyToastComponent } from '../../components/my-toast/my-toast.component';
+import { TempsAttenteFav } from '../../models/temps-attente-fav';
+import { FavorisService } from '../../services/favoris.service';
+import { take } from 'rxjs/operators';
 
-@Component({
+@Component({ 
   selector: 'app-station',
   templateUrl: './station.page.html',
   styleUrls: ['./station.page.scss'],

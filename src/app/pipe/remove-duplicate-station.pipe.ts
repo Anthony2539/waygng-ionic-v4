@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Station } from '../station';
+import { Station } from '../models/station';
 import * as _ from 'lodash';
 
 @Pipe({

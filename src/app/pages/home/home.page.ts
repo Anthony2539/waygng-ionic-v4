@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../auth.service';
-import { FavorisService } from '../favoris.service';
+import { AuthService } from '../../services/auth.service';
+import { FavorisService } from '../../services/favoris.service';
 import * as firebase from 'firebase';
 
 @Component({

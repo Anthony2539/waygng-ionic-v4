@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Tarif } from '../tarif';
-import { GinkoService } from '../ginko.service';
-import { MyToastComponent } from '../components/my-toast/my-toast.component';
+import { Tarif } from '../../models/tarif';
+import { GinkoService } from '../../services/ginko.service';
+import { MyToastComponent } from '../../components/my-toast/my-toast.component';
 
 @Component({
   selector: 'app-tarif',

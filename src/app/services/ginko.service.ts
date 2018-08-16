@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Station } from './station';
-import { StationAttente } from './station-attente';
-import { SearchListeTemps } from './search-liste-temps';
-import { InfosTrafic } from './infos-trafic';
+import { Station } from '../models/station';
+import { StationAttente } from '../models/station-attente';
+import { SearchListeTemps } from '../models/search-liste-temps';
+import { InfosTrafic } from '../models/infos-trafic';
 
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';

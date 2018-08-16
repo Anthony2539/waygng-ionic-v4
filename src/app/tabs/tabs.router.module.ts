@@ -2,11 +2,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { TabsPage } from './tabs.page';
-import { HomePage } from '../home/home.page';
-import { SearchPage } from '../search/search.page';
-import { MapPage } from '../map/map.page';
-import { InfoPage } from '../info/info.page';
-import { TarifPage } from '../tarif/tarif.page';
+import { HomePage } from '../pages/home/home.page';
+import { SearchPage } from '../pages/search/search.page';
+import { MapPage } from '../pages/map/map.page';
+import { InfoPage } from '../pages/info/info.page';
+import { TarifPage } from '../pages/tarif/tarif.page';
+
 
 const routes: Routes = [
   {
