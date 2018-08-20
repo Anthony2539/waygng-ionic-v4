@@ -3,7 +3,6 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Station } from '../models/station';
 import { StationAttente } from '../models/station-attente';
 import { SearchListeTemps } from '../models/search-liste-temps';
-import { InfosTrafic } from '../models/infos-trafic';
 
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -138,7 +137,7 @@ export class GinkoService {
         .pipe(
             map(response => {
             var data = response.objets;
-            return new InfosTrafic(data);
+            //return new InfosTrafic(data);
             })
         );
   }

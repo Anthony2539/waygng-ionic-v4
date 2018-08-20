@@ -1,15 +1,15 @@
 <ion-header>
     <ion-toolbar color="primary">
-        <ion-searchbar showCancelButton placeholder="{{ 'SEARCH_STATION' | translate }}" cancelButtonText="{{ 'CANCEL' | translate }}"  (ionInput)="filterItems($event)" (ionCancel)="onCancel($event)"></ion-searchbar>
+        <ion-searchbar color="primary" showCancelButton placeholder="{{ 'SEARCH_STATION' | translate }}" cancelButtonText="{{ 'CANCEL' | translate }}"  (ionInput)="filterItems($event)" (ionCancel)="onCancel($event)"></ion-searchbar>
     </ion-toolbar>
 </ion-header>
     
 <ion-content>
     <my-loader *ngIf="loading"></my-loader>
     <ion-list *ngIf="!loading">
-        <ion-item button *ngFor="let station of stations | removeDuplicateStation"  (click)="itemSelected(station)" >
+        <div class="search-border" button padding *ngFor="let station of stations | removeDuplicateStation"  (click)="itemSelected(station)" >
             {{station.name}}
-        </ion-item>    
+        </div>    
     </ion-list>
 </ion-content>
     

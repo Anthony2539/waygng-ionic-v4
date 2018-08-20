@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="primary">
-      <ion-searchbar placeholder="{{ 'STATION' | translate }}" routerLink="/search"></ion-searchbar>
+      <ion-searchbar color="primary" placeholder="{{ 'STATION' | translate }}" routerLink="/tabs/search"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
@@ -12,8 +12,8 @@
     <div *ngIf="favoris?.length==0 && !loadFavoris" class="warning-container">{{ 'WARNING.EMPTY_FAV' | translate }}</div>
 
     <ion-item-sliding *ngFor="let fav of favoris">
-        <ion-item>
-          <ion-icon name="pin" item-start></ion-icon>
+        <ion-item button>
+          <ion-icon name="pin" size="small"></ion-icon>
           <ion-label padding-start>{{fav.name}} </ion-label>
         </ion-item>    
         <ion-item-options side="end">

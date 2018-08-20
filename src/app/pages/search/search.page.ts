@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Station } from '../../models/station';
 import { GinkoService } from '../../services/ginko.service';
 
