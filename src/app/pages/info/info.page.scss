@@ -1,0 +1,17 @@
+.numLigne{
+    text-align: center;
+    font-weight: bold;
+    border-radius: 2px;
+    padding: 0px !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    max-height: 20px;
+    margin-bottom: 0px !important;
+    margin-top: 0px !important;
+}
+
+.numLigne:not(:first-child) {
+    margin-left: 10px;
+}

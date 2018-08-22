@@ -6,6 +6,7 @@ import { SearchListeTemps } from '../models/search-liste-temps';
 
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
+import { InfosTrafic } from '../models/infos-trafic';
  
 @Injectable({
   providedIn: 'root'
@@ -137,7 +138,7 @@ export class GinkoService {
         .pipe(
             map(response => {
             var data = response.objets;
-            //return new InfosTrafic(data);
+            return new InfosTrafic(data);
             })
         );
   }

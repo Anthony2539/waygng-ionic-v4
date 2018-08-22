@@ -43,6 +43,10 @@ export class SearchPage implements OnInit {
     }
   }
 
+  trackByFn(index, station: Station) {
+    return station;
+  }
+
   onCancel(ev){
     this.router.navigate(['']);
   }

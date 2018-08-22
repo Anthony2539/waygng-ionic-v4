@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { GinkoService } from '../../services/ginko.service';
+import { Observable } from 'rxjs';
+import { MyToastComponent } from '../../components/my-toast/my-toast.component';
+import { InfosTrafic } from '../../models/infos-trafic';
 
 @Component({
   selector: 'app-info',
@@ -7,9 +11,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InfoPage implements OnInit {
 
-  constructor() { }
+  infosTrafic: Observable<InfosTrafic>;
+
+  constructor(private ginkoService:GinkoService, public myToast: MyToastComponent) { }
 
   ngOnInit() {
+    this.getInfosTrafic(null);
+  }
+
+  getInfosTrafic(refresher){
+    this.infosTrafic = this.ginkoService.fetchInfosTrafic();
+    this.infosTrafic.subscribe(() => {
+      if(refresher){
+        refresher.complete();
+      }
+    },
+    (err) => {
+      if(refresher){
+        refresher.complete();
+      }
+      this.myToast.createToast("ERROR_IMPOSSIBLE_REFRESH", 'top');
+    });
+  }
+
+  doRefresh(refresher){
+    this.getInfosTrafic(refresher);
   }
 
 }
