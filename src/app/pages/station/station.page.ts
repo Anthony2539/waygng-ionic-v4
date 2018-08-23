@@ -95,7 +95,7 @@ checkIfInFavoris(){
 }
 
 
-eventFavoris(tempsAttente:TempsAttente){
+eventFavoris(tempsAttente?:TempsAttente){
   if(tempsAttente){
     let tempsAttenteFav: TempsAttenteFav = {
       idArret: tempsAttente.idArret,

@@ -23,12 +23,12 @@ export class InfoPage implements OnInit {
     this.infosTrafic = this.ginkoService.fetchInfosTrafic();
     this.infosTrafic.subscribe(() => {
       if(refresher){
-        refresher.complete();
+        refresher.target.complete();
       }
     },
     (err) => {
       if(refresher){
-        refresher.complete();
+        refresher.target.complete();
       }
       this.myToast.createToast("ERROR_IMPOSSIBLE_REFRESH", 'top');
     });
@@ -37,5 +37,6 @@ export class InfoPage implements OnInit {
   doRefresh(refresher){
     this.getInfosTrafic(refresher);
   }
+  
 
 }

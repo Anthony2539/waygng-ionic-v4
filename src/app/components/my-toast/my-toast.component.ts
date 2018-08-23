@@ -25,9 +25,9 @@ export class MyToastComponent implements OnInit {
     });
       
     });
-  }
+  } 
 
-  private async presentToast(message:string, position:string){
+ private async presentToast(message:string, position:string){
     const toast = await this.toastCtrl.create({
       message: message,
       duration: 3000,

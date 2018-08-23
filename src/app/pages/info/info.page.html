@@ -6,7 +6,7 @@
 
 <ion-content>
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content refreshingText="{{ 'REFRESHING' | translate }}"></ion-refresher-content>
+    <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ion-list>
     <ion-card *ngFor="let info of (infosTrafic | async)?.infosAnticipees">
