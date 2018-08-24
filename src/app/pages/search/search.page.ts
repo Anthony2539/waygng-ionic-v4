@@ -41,6 +41,9 @@ export class SearchPage implements OnInit {
         return (station.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
       });
     }
+
+    const event:any = (new window['Event']('resize') as any);
+    window.dispatchEvent(event);
   }
 
   trackByFn(index, station: Station) {
