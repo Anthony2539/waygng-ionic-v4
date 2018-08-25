@@ -8,6 +8,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { StationPage } from './station.page';
 import { ComponentsModule } from '../../components/components.module';
 import { FormatDatePipe } from '../../pipe/format-date.pipe';
+import { PipesModule } from '../../pipe/pipes.module';
 
 const routes: Routes = [
   {
@@ -21,10 +22,11 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    PipesModule,
     ComponentsModule,
     TranslateModule.forChild(),
     RouterModule.forChild(routes)
   ],
-  declarations: [StationPage, FormatDatePipe]
+  declarations: [StationPage]
 })
 export class StationPageModule {}

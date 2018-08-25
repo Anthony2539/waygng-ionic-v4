@@ -9,6 +9,10 @@
 
 <ion-content>
 
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
         <ion-fab-button color="primary" (click)="eventFavoris()">
             <ion-icon [color]="isInfavoris ? 'tertiary' : 'dark'" [name]="isInfavoris ? 'ios-star' : 'ios-star-outline'"></ion-icon>
@@ -31,7 +35,7 @@
                     <h3>{{tempsAttente.destination}}</h3>
                     <p>{{tempsAttente.precisionDestination}}</p>
                 </ion-label>
-                <ion-icon name="star-outline"></ion-icon>
+                <ion-icon [color]="tempsAttente.isInfavoris ? 'tertiary' : 'dark'" [name]="tempsAttente.isInfavoris ? 'ios-star' : 'ios-star-outline'" (click)="eventFavoris(tempsAttente)"></ion-icon>
             </ion-item>
             <div class="timeContainer">
                 <div class="time" *ngFor="let time of tempsAttente.lstTemps">{{time}}</div>

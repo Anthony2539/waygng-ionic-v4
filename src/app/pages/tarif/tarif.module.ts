@@ -8,7 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { TarifPage } from './tarif.page';
 import { TranslateModule } from '@ngx-translate/core';
 import { ComponentsModule } from '../../components/components.module';
-import { FormatTypeTransportPipe } from '../../pipe/format-type-transport.pipe';
+import { PipesModule } from '../../pipe/pipes.module';
 
 
 const routes: Routes = [
@@ -23,10 +23,11 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    PipesModule, 
     ComponentsModule,
     TranslateModule.forChild(),
     RouterModule.forChild(routes)
   ],
-  declarations: [TarifPage, FormatTypeTransportPipe]
+  declarations: [TarifPage]
 })
 export class TarifPageModule {}

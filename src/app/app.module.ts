@@ -9,6 +9,9 @@ import { HttpModule } from '@angular/http';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Globalization } from '@ionic-native/globalization/ngx';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { Keyboard } from '@ionic-native/keyboard/ngx';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,7 +25,8 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { MyToastComponent } from './components/my-toast/my-toast.component';
-import { Globalization } from '@ionic-native/globalization/ngx';
+import { PipesModule } from './pipe/pipes.module';
+
 
 
 
@@ -37,6 +41,7 @@ export function createTranslateLoader(http: HttpClient) {
             BrowserModule, 
             HttpModule,
             HttpClientModule,
+            PipesModule,
             IonicModule.forRoot(),  
             TranslateModule.forRoot({
               loader: {
@@ -55,6 +60,8 @@ export function createTranslateLoader(http: HttpClient) {
     StatusBar,
     SplashScreen,
     MyToastComponent,
+    Geolocation,
+    Keyboard,
     Globalization,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

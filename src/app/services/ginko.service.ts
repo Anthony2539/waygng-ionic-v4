@@ -39,9 +39,12 @@ export class GinkoService {
     }  
 
   fetchStationsProche(latitude, longitude):Observable<any> {
-    let params = new HttpParams();
-    params.set('latitude', latitude);
-    params.set('longitude', longitude);
+    const params = new HttpParams({
+        fromObject: {
+            latitude: latitude,
+            longitude: longitude,
+          }
+    });
     return this.http.get<any>(this.urlGinko+"/DR/getArretsProches.do", {params: params})
     .pipe(
         map(response => {
@@ -61,8 +64,7 @@ export class GinkoService {
     );
 }  
 
-  fetchListeTemps(searchListeTemps:SearchListeTemps) {
-    let params = new HttpParams();
+  fetchListeTemps(searchListeTemps:SearchListeTemps):Observable<StationAttente[]> {
     let noms = "";
     if(searchListeTemps.listeNoms){
         searchListeTemps.listeNoms.forEach((nom, index, array) => {
@@ -72,7 +74,6 @@ export class GinkoService {
                 noms+=nom+"~";
             }  
         });
-        params.set('listeNoms', noms); 
     }
     let lignes = "";
     if(searchListeTemps.listeIdLignes){
@@ -83,7 +84,6 @@ export class GinkoService {
                 lignes+=ligne+"~";
             } 
         });
-        params.set('listeIdLignes', lignes);
     }
     let sensAller = "";
     if(searchListeTemps.listeSensAller){
@@ -94,10 +94,17 @@ export class GinkoService {
                 sensAller+=sens.toString()+"~";
             } 
         }); 
-        params.set('listeSensAller', sensAller);
     }
-    params.set('preserverOrdre', searchListeTemps.preserverOrdre.toString());
-    params.set('nb', searchListeTemps.nb.toString());
+
+    const params = new HttpParams({
+        fromObject: {
+            listeNoms: noms,
+            listeIdLignes: lignes,
+            listeSensAller: sensAller,
+            nb: searchListeTemps.nb.toString(),
+            preserverOrdre: searchListeTemps.preserverOrdre.toString(),
+          }
+    });
     return this.http
         .get<any>(this.urlGinko+"/TR/getListeTemps.do", {params: params})
         .pipe(

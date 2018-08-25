@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Station } from '../../models/station';
 import { GinkoService } from '../../services/ginko.service';
@@ -9,6 +9,8 @@ import { GinkoService } from '../../services/ginko.service';
   styleUrls: ['./search.page.scss'],
 })
 export class SearchPage implements OnInit {
+
+  @ViewChild('searchBar') searchBar: any;  
 
   allStations: Station[] = [];
   stations: Station[] = [];
@@ -57,5 +59,6 @@ export class SearchPage implements OnInit {
   itemSelected(station){
     this.router.navigate(['station'], {queryParams: station});
   }
+
 
 }

@@ -11,17 +11,22 @@ import { InfosTrafic } from '../../models/infos-trafic';
 })
 export class InfoPage implements OnInit {
 
+  loading: boolean = false;
   infosTrafic: Observable<InfosTrafic>;
 
   constructor(private ginkoService:GinkoService, public myToast: MyToastComponent) { }
 
   ngOnInit() {
-    this.getInfosTrafic(null);
+    this.getInfosTrafic();
   }
 
-  getInfosTrafic(refresher){
+  getInfosTrafic(refresher?){
+    if(!refresher){
+      this.loading = true;
+    }
     this.infosTrafic = this.ginkoService.fetchInfosTrafic();
     this.infosTrafic.subscribe(() => {
+      this.loading = false;
       if(refresher){
         refresher.target.complete();
       }

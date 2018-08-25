@@ -5,22 +5,60 @@
 </ion-header>
 
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <ion-list no-margin>
     <ion-list-header color="light">
       <ion-icon name="star"></ion-icon><ion-label padding-start>{{ 'FAVORIS' | translate }}</ion-label>
+      <ion-text margin-end text-lowercase text-wrap style="font-size: 10px">{{dateLastUpdate | formatDate:'calendar'}}</ion-text>
+      <my-header-loader *ngIf="loadFavoris"></my-header-loader>
     </ion-list-header>
     <div *ngIf="favoris?.length==0 && !loadFavoris" class="warning-container">{{ 'WARNING.EMPTY_FAV' | translate }}</div>
 
-    <ion-item-sliding *ngFor="let fav of favoris">
-        <ion-item button>
-          <ion-icon name="pin" size="small"></ion-icon>
-          <ion-label padding-start>{{fav.name}} </ion-label>
-        </ion-item>    
+    <ion-item-sliding *ngFor="let tempsAttenteFav of tempsAttenteFavs">
+        <ion-item button (click)="itemSelected(tempsAttenteFav.station)">
+            <ion-thumbnail slot="start" class="numLigne" style.color="#{{tempsAttenteFav.couleurTexte}}" style.background-color="#{{tempsAttenteFav.couleurFond}}">
+                {{tempsAttenteFav.numLignePublic}}
+            </ion-thumbnail>
+            <ion-label text-wrap>
+                <h3>{{tempsAttenteFav.station.name}}</h3>
+                <p>{{tempsAttenteFav.destination}}</p>
+            </ion-label>
+            <ion-text slot="end">{{tempsAttenteFav.temps}}</ion-text>
+        </ion-item>   
         <ion-item-options side="end">
-            <ion-item-option color="danger" onclick="removeFavoris(fav)">
+            <ion-item-option color="danger" (click)="removeTempsAttenteFavoris(tempsAttenteFav)">
                 <ion-icon slot="icon-only" name="trash"></ion-icon>
             </ion-item-option>
         </ion-item-options>
     </ion-item-sliding>
+
+    <ion-item-sliding *ngFor="let fav of favoris">
+        <ion-item button (click)="itemSelected(fav)">
+          <ion-icon name="pin" size="small"></ion-icon>
+          <ion-text padding-start>{{fav.name}} </ion-text>
+        </ion-item>    
+        <ion-item-options side="end">
+            <ion-item-option color="danger" (click)="removeFavoris(fav)">
+                <ion-icon slot="icon-only" name="trash"></ion-icon>
+            </ion-item-option>
+        </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+
+  <ion-list no-margin>
+      <ion-list-header color="light">
+        <ion-icon name="pin"></ion-icon><ion-label padding-start>{{ 'NEAREST_STATION' | translate }}</ion-label>
+        <my-header-loader *ngIf="loadStationProche"></my-header-loader>
+      </ion-list-header>
+      <div *ngIf="stationProches?.length==0 && !loadStationProche" class="warning-container">{{ 'WARNING.NO_STATION_NEARBY' | translate }}</div>
+
+      <ion-item button *ngFor="let station of stationProches | removeDuplicateStation | slice:0:4"  (click)="itemSelected(station)">
+          <ion-text text-nowrap> {{station.name}} </ion-text>
+          <ion-text slot="end">{{station.latLong | calculateDistance:latitude:longitude }}</ion-text>
+        </ion-item>
   </ion-list>
 </ion-content>

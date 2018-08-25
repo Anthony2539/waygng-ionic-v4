@@ -33,6 +33,10 @@ export class StationPage implements OnInit {
     this.fetchStationTemps();
   }
 
+  doRefresh(refresher) {
+    this.fetchStationTemps(refresher);
+  }
+
   fetchStationTemps(refresher?){
     if(this.station){
       this.checkIfInFavoris();
@@ -65,17 +69,17 @@ export class StationPage implements OnInit {
           });
         this.dateLastUpdate = new Date().getTime();
 
-        //this.checkIfTempsAttenteInFavoris();
+        this.checkIfTempsAttenteInFavoris();
 
         if(refresher != null){
-          refresher.complete();
+          refresher.target.complete();
         }
         this.loading = false;
       },
       (err) => {
         this.loading = false;
         if(refresher){
-          refresher.complete();
+          refresher.target.complete();
         }
         this.myToast.createToast("ERROR_IMPOSSIBLE_REFRESH", 'top');
       }
@@ -91,6 +95,19 @@ checkIfInFavoris(){
     }else{
       this.isInfavoris = false;
     }
+  });
+}
+
+checkIfTempsAttenteInFavoris(){
+  this.favorisService.getFavorisTempsAttenteList(this.station.id).valueChanges().subscribe((tempsAttenteFav:TempsAttenteFav[]) => {
+    this.listeTemps.forEach((temps:TempsAttente) =>{
+      tempsAttenteFav.forEach((tempsFav:TempsAttenteFav) => {
+        if(temps.idArret == tempsFav.idArret && temps.sensAller == tempsFav.sensAller && temps.idLigne == tempsFav.idLigne){
+          temps.isInfavoris = true;
+        }
+      });
+    });
+
   });
 }
 
