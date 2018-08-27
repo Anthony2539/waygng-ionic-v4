@@ -24,7 +24,6 @@ export class MapPage implements OnInit {
 }
 
 loadMap() {
-  alert("toto");
   this.map = GoogleMaps.create('map_canvas', {
     camera: {
       target: {
