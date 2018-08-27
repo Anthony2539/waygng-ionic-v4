@@ -57,7 +57,7 @@ export class InfoPage implements OnInit {
     const popover = await this.popoverController.create({
       component: GinkoInfoComponent,
       event: event,
-      translucent: true
+      translucent: false
     });
     return await popover.present();
   }
