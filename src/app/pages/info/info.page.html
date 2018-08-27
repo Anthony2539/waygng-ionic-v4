@@ -1,6 +1,11 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title>{{ 'TITLE.TRAFFIC_INFO' | translate }}</ion-title>
+    <ion-buttons slot="primary">
+        <ion-button (click)="presentPopover()">
+            <ion-icon slot="end" name="help-circle"></ion-icon>
+        </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -27,6 +32,5 @@
               <p>{{info.url}}</p>
           </ion-card-content>
     </ion-card>
-
   </ion-list>
 </ion-content>

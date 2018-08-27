@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { MyLoaderComponent } from './my-loader/my-loader.component';
 import { MyHeaderLoaderComponent } from './my-header-loader/my-header-loader.component';
 import { MyToastComponent } from './my-toast/my-toast.component';
+import { GinkoInfoComponent } from './ginko-info/ginko-info.component';
 
 
 @NgModule({
@@ -13,8 +14,8 @@ import { MyToastComponent } from './my-toast/my-toast.component';
     FormsModule,
     IonicModule.forRoot(),
   ],
-  declarations: [MyLoaderComponent, MyToastComponent, MyHeaderLoaderComponent],
-  exports: [MyLoaderComponent,MyToastComponent, MyHeaderLoaderComponent],
-  entryComponents: [],
+  declarations: [MyLoaderComponent, MyToastComponent, MyHeaderLoaderComponent, GinkoInfoComponent],
+  exports: [MyLoaderComponent,MyToastComponent, MyHeaderLoaderComponent, GinkoInfoComponent],
+  entryComponents: [GinkoInfoComponent],
 })
 export class ComponentsModule {}
