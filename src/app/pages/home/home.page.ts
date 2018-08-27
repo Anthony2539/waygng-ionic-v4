@@ -27,6 +27,7 @@ export class HomePage {
   longitude: number;
   tempsAttenteFavs: TempsAttenteFav[] = [];
   dateLastUpdate: number;
+  isErrorLocation:boolean = false;
 
   constructor(
     public auth: AuthService,
@@ -92,6 +93,7 @@ export class HomePage {
     this.stationProches = [];
     this.loadStationProche = true; 
     this.geolocation.getCurrentPosition().then((position:Geoposition) => {
+      this.isErrorLocation = false;
       this.latitude = position.coords.latitude;
       this.longitude = position.coords.longitude;
       this.ginkoService.fetchStationsProche(this.latitude,this.longitude)
@@ -109,6 +111,12 @@ export class HomePage {
         }
         this.myToast.createToast("ERROR_IMPOSSIBLE_REFRESH",'top');
       });
+    },(err) => {
+      this.loadStationProche = false;
+      this.isErrorLocation = true;
+      if(refresher){
+        refresher.target.complete();
+      }
     });
   } 
 

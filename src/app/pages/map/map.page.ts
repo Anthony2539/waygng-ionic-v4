@@ -3,10 +3,6 @@ import { Platform } from '@ionic/angular';
 import {
   GoogleMaps,
   GoogleMap,
-  GoogleMapsEvent,
-  Marker,
-  GoogleMapsAnimation,
-  MyLocation
 } from '@ionic-native/google-maps';
 
 @Component({
@@ -28,6 +24,7 @@ export class MapPage implements OnInit {
 }
 
 loadMap() {
+  alert("toto");
   this.map = GoogleMaps.create('map_canvas', {
     camera: {
       target: {

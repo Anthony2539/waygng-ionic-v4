@@ -54,7 +54,8 @@
         <ion-icon name="pin"></ion-icon><ion-label padding-start>{{ 'NEAREST_STATION' | translate }}</ion-label>
         <my-header-loader *ngIf="loadStationProche"></my-header-loader>
       </ion-list-header>
-      <div *ngIf="stationProches?.length==0 && !loadStationProche" class="warning-container">{{ 'WARNING.NO_STATION_NEARBY' | translate }}</div>
+      <div *ngIf="stationProches?.length==0 && !loadStationProche && !isErrorLocation" class="warning-container">{{ 'WARNING.NO_STATION_NEARBY' | translate }}</div>
+      <div *ngIf="isErrorLocation && !loadStationProche" class="warning-container">{{ 'WARNING.ACTIVE_YOUR_LOCALISATION' | translate }}</div>
 
       <ion-item button *ngFor="let station of stationProches | removeDuplicateStation | slice:0:4"  (click)="itemSelected(station)">
           <ion-text text-nowrap> {{station.name}} </ion-text>

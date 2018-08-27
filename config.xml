@@ -90,7 +90,7 @@
     <plugin name="cordova-plugin-geolocation" spec="^4.0.1">
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="To locate you" />
     </plugin>
-    <plugin name="cordova-plugin-googlemaps" spec="^2.4.0">
+    <plugin name="cordova-plugin-googlemaps" spec="^2.4.1">
         <variable name="API_KEY_FOR_ANDROID" value="AIzaSyCYb5LKTNbtKxDSXPseyPj_3v_e35D_m-o" />
         <variable name="API_KEY_FOR_IOS" value="AIzaSyCYb5LKTNbtKxDSXPseyPj_3v_e35D_m-o" />
         <variable name="LOCATION_WHEN_IN_USE_DESCRIPTION" value="This app wants to get your location while this app runs only." />

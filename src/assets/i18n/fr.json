@@ -34,7 +34,7 @@
         "SEARCH_TIMETABLE": "Recherchez une station pour afficher les prochains passages",
         "LAST_UPDATE": "Dernière mise à jour",
         "NO_STATION_NEARBY": "Aucune station à proximité",
-        "NO_USER_SHARE_STATION":"Aucune personne ne partage cette station"
+        "ACTIVE_YOUR_LOCALISATION": "Veuillez activer votre localisation"
     },
     "REFRESHING": "Chargement...",
     "NEAREST_STATION": "Stations les plus proches",

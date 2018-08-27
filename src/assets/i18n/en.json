@@ -34,7 +34,7 @@
         "SEARCH_TIMETABLE": "Search station to show next",
         "LAST_UPDATE": "Last update",
         "NO_STATION_NEARBY": "No station nearby",
-        "NO_USER_SHARE_STATION":"No one is sharing this station"
+        "ACTIVE_YOUR_LOCALISATION": "Please activate your localisation"
     },
     "REFRESHING": "Loading...",
     "NEAREST_STATION": "Nearest stations",
