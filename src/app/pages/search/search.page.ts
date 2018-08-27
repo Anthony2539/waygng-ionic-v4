@@ -48,10 +48,6 @@ export class SearchPage implements OnInit {
     window.dispatchEvent(event);
   }
 
-  trackByFn(index, station: Station) {
-    return station;
-  }
-
   onCancel(ev){
     this.router.navigate(['']);
   }

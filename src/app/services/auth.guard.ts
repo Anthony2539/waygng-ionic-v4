@@ -22,7 +22,7 @@ export class AuthGuard implements CanActivate {
         } else {
           console.log('User is not logged in');
           this.auth.createAnonymousUser();
-          resolve(false);
+          resolve(true);
         }
       });
     });

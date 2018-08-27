@@ -31,6 +31,7 @@ export class AppComponent {
      this.translate.use('fr');
 
       this.statusBar.styleDefault();
+      this.statusBar.styleLightContent();
       this.splashScreen.hide();
  
       this.globalization.getPreferredLanguage().then(res => 

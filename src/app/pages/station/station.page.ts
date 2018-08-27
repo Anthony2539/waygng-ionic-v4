@@ -15,6 +15,7 @@ import { take } from 'rxjs/operators';
 })
 export class StationPage implements OnInit {
 
+
   station:Station;
   loading:boolean = false;
   listeTemps: TempsAttente[] = [];
@@ -153,7 +154,6 @@ eventFavoris(tempsAttente?:TempsAttente){
       })
     }
   }
-
 }
 
 }

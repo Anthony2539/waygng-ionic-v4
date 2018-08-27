@@ -11,7 +11,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Globalization } from '@ionic-native/globalization/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { Keyboard } from '@ionic-native/keyboard/ngx';
+import { GoogleMaps } from '@ionic-native/google-maps/ngx';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -61,7 +61,7 @@ export function createTranslateLoader(http: HttpClient) {
     SplashScreen,
     MyToastComponent,
     Geolocation,
-    Keyboard,
+    GoogleMaps,
     Globalization,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
