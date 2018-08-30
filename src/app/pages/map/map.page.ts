@@ -38,8 +38,8 @@ export class MapPage implements OnInit {
     this.stationsAdded = [];
     this.station = this.route.snapshot.queryParams as Station;
     if(this.station){
-      alert(this.station.name);
-    }
+      alert(this.station.name); 
+    } 
     const opts:LoadingOptions = {message:"Chargement", translucent: true};
     this.loading = await this.loadingCtrl.create(opts);
     await this.loading.present();
