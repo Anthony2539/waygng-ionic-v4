@@ -5,12 +5,11 @@
 </ion-header>
     
 <ion-content>
-        <my-loader *ngIf="loading"></my-loader>
+    <my-loader *ngIf="loading"></my-loader>
     <ion-virtual-scroll *ngIf="!loading" [items]="stations | removeDuplicateStation" approxItemHeight="45px">
         <ion-item button *virtualItem="let station" (click)="itemSelected(station)">
             {{station.name}}
         </ion-item>
     </ion-virtual-scroll>
-
 </ion-content>
     

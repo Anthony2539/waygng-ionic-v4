@@ -4,6 +4,11 @@
         <ion-back-button text=""></ion-back-button>
         </ion-buttons>
       <ion-title>{{ station?.name }}</ion-title>
+      <ion-buttons slot="primary">
+            <ion-button (click)="goMap()">
+                <ion-icon slot="end" name="pin"></ion-icon>
+            </ion-button>
+        </ion-buttons>
   </ion-toolbar>
 </ion-header>
 

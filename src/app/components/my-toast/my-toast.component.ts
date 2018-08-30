@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastController } from '@ionic/angular';
+import { ToastOptions } from '@ionic/core';
 
 @Component({
   selector: 'my-toast',
@@ -28,11 +29,13 @@ export class MyToastComponent implements OnInit {
   } 
 
  private async presentToast(message:string, position:string){
-    const toast = await this.toastCtrl.create({
-      message: message,
-      duration: 3000,
-      position: position 
-    });
+   const opts:ToastOptions = {message:message, duration: 3000};
+   if(position == "top"){
+    opts.position = "top";
+   }else if(position == "bottom"){
+     opts.position = "bottom";
+   }
+    const toast = await this.toastCtrl.create(opts);
     toast.present();
   }
 

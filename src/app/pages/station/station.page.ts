@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Station } from '../../models/station';
 import { GinkoService } from '../../services/ginko.service';
 import { TempsAttente } from '../../models/temps-attente';
@@ -26,10 +26,10 @@ export class StationPage implements OnInit {
   constructor(private route: ActivatedRoute, 
               private ginkoService: GinkoService, 
               private favorisService: FavorisService,
+              private router: Router,
               public myToast: MyToastComponent) { }
 
   ngOnInit() {
-
     this.station = this.route.snapshot.queryParams as Station;
     this.fetchStationTemps();
   }
@@ -155,5 +155,9 @@ eventFavoris(tempsAttente?:TempsAttente){
     }
   }
 }
+
+  goMap(){
+    this.router.navigate(['map'], {queryParams: this.station});
+  }
 
 }

@@ -80,6 +80,7 @@
         <string>Nous avons besoin de votre localisation pour trouver les stations proches de vous</string>
     </edit-config>
     <engine name="ios" spec="4.5.5" />
+    <engine name="browser" spec="5.0.4" />
     <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
     <plugin name="cordova-plugin-device" spec="^2.0.2" />
     <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />
