@@ -13,6 +13,7 @@ import { GinkoInfoComponent } from '../../components/ginko-info/ginko-info.compo
 })
 export class InfoPage implements OnInit {
 
+  isInfosAnticipees: boolean = false;
   loading: boolean = false;
   infosTrafic: Observable<InfosTrafic>;
 
@@ -20,6 +21,14 @@ export class InfoPage implements OnInit {
 
   ngOnInit() {
     this.getInfosTrafic();
+  }
+
+  segmentChanged(ev: any) {
+    if(ev.detail.value == "infosAnticipees"){
+      this.isInfosAnticipees = true;
+    }else{
+      this.isInfosAnticipees = false;
+    }
   }
 
   getInfosTrafic(refresher?){

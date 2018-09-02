@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { FavorisService } from '../../services/favoris.service';
-import * as firebase from 'firebase';
 import { Station } from '../../models/station';
 import { MyToastComponent } from '../../components/my-toast/my-toast.component';
 import { GinkoService } from '../../services/ginko.service';

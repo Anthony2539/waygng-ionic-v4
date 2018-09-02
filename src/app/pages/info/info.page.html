@@ -14,8 +14,38 @@
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-list>
+  <ion-toolbar>
+  <ion-segment (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="infosTempsReel" checked>
+      {{ 'TRAFFIC_INFO' | translate }}
+    </ion-segment-button>
+    <ion-segment-button text-wrap value="infosAnticipees">
+      {{ 'ACTUALITY' | translate }}
+    </ion-segment-button>
+  </ion-segment>
+</ion-toolbar>
+  <ion-list *ngIf="isInfosAnticipees">
     <ion-card *ngFor="let info of (infosTrafic | async)?.infosAnticipees">
+        <ion-card-header>
+            <ion-card-subtitle>
+              <ion-thumbnail text-wrap *ngFor="let line of info.lignes" class="numLigne"  style.color="#{{line.couleurTexte}}" style.background-color="#{{line.couleurFond}}">
+                {{line.numLignePublic}}
+              </ion-thumbnail>
+            </ion-card-subtitle>
+            <ion-card-title text-wrap style="font-size: 14px">{{info.titre}}</ion-card-title>
+        </ion-card-header>
+
+          <ion-card-content>
+              <p [innerHTML]="info.texte"></p>
+              <p [innerHTML]="info.complement"></p>
+              
+              <p>{{info.url}}</p>
+          </ion-card-content>
+    </ion-card>
+  </ion-list>
+  <ion-list *ngIf="!isInfosAnticipees">
+    <div *ngIf="(infosTrafic | async)?.infosTempsReel.length==0 && !loading" class="warning-container">{{ 'WARNING.NO_TRAFFIC_INFO' | translate }}</div>
+    <ion-card *ngFor="let info of (infosTrafic | async)?.infosTempsReel">
         <ion-card-header>
             <ion-card-subtitle>
               <ion-thumbnail text-wrap *ngFor="let line of info.lignes" class="numLigne"  style.color="#{{line.couleurTexte}}" style.background-color="#{{line.couleurFond}}">

@@ -5,7 +5,7 @@ import { StationAttente } from '../models/station-attente';
 import { SearchListeTemps } from '../models/search-liste-temps';
 
 import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, map} from 'rxjs/operators';
 import { InfosTrafic } from '../models/infos-trafic';
  
 @Injectable({

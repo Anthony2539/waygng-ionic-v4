@@ -34,7 +34,8 @@
         "SEARCH_TIMETABLE": "Search station to show next",
         "LAST_UPDATE": "Last update",
         "NO_STATION_NEARBY": "No station nearby",
-        "ACTIVE_YOUR_LOCALISATION": "Please activate your localisation"
+        "ACTIVE_YOUR_LOCALISATION": "Please activate your localisation",
+        "NO_TRAFFIC_INFO": "No traffic info at the moment"
     },
     "REFRESHING": "Loading...",
     "NEAREST_STATION": "Nearest stations",
@@ -46,5 +47,7 @@
     "ERROR_IMPOSSIBLE_POSITION": "Can not load your position. Please enable localization.",
     "REMOVED_FAVORITES": "removed from favorites !",
     "ADDED_FAVORITES": "added from favorites !",
-    "CANCEL": "Cancel"
+    "CANCEL": "Cancel",
+    "TRAFFIC_INFO": "Traffic info",
+    "ACTUALITY": "Actuality"
 }

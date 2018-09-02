@@ -34,7 +34,8 @@
         "SEARCH_TIMETABLE": "Recherchez une station pour afficher les prochains passages",
         "LAST_UPDATE": "Dernière mise à jour",
         "NO_STATION_NEARBY": "Aucune station à proximité",
-        "ACTIVE_YOUR_LOCALISATION": "Veuillez activer votre localisation"
+        "ACTIVE_YOUR_LOCALISATION": "Veuillez activer votre localisation",
+        "NO_TRAFFIC_INFO": "Aucune info trafic pour le moment"
     },
     "REFRESHING": "Chargement...",
     "NEAREST_STATION": "Stations les plus proches",
@@ -46,5 +47,7 @@
     "ERROR_IMPOSSIBLE_POSITION": "Impossible de charger votre position. Merci d'activer votre localisation.",
     "REMOVED_FAVORITES": "supprimé des favoris !",
     "ADDED_FAVORITES": "ajouté aux favoris !",
-    "CANCEL": "Annuler"
+    "CANCEL": "Annuler",
+    "TRAFFIC_INFO": "Info trafic",
+    "ACTUALITY": "Actualités"
 }
