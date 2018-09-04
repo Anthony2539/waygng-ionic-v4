@@ -36,32 +36,47 @@ export class MapPage implements OnInit {
 
   async ngOnInit() {
     this.stationsAdded = [];
-    this.station = this.route.snapshot.queryParams as Station;
-    if(this.station){
-      alert(this.station.name); 
-    } 
     const opts:LoadingOptions = {message:"Chargement", translucent: true};
     this.loading = await this.loadingCtrl.create(opts);
     await this.loading.present();
     await this.platform.ready();
-    await this.initMap();
+    const id = this.route.snapshot.paramMap.get('id');
+    await this.initMap(id);
 }
 
-initMap(){
-
-  this.geolocation.getCurrentPosition().then((position:Geoposition) => {
-    let latitude = position.coords.latitude;
-    let longitude = position.coords.longitude;
-    this.ginkoService.fetchStationsProche(latitude,longitude).subscribe((stations:Station[]) => {
-      this.loadMap(latitude,longitude,stations);
-    },
-    (err) => {
+initMap(id?:string){
+  if(id){
+    this.ginkoService.fetchStation(id).subscribe((station:Station) => {
+      this.ginkoService.fetchStationsProche(station.latitude,station.longitude).subscribe((stations:Station[]) => {
+        this.loadMap(station.latitude,station.longitude,stations);
+      },
+      (err) => {
+        this.myToast.createToast("ERROR_IMPOSSIBLE_REFRESH", 'top');
+        this.loading.dismiss();
+        this.isErrorLocation = true;
+      });
+    },(err) => {
       this.myToast.createToast("ERROR_IMPOSSIBLE_REFRESH", 'top');
+      this.loading.dismiss();
+      this.isErrorLocation = true;
     });
-  },(err) => {
-    this.loading.dismiss();
-    this.isErrorLocation = true;
-  });
+    
+  }else{
+    this.geolocation.getCurrentPosition().then((position:Geoposition) => {
+      let latitude = position.coords.latitude;
+      let longitude = position.coords.longitude;
+      this.ginkoService.fetchStationsProche(latitude,longitude).subscribe((stations:Station[]) => {
+        this.loadMap(latitude,longitude,stations);
+      },
+      (err) => {
+        this.myToast.createToast("ERROR_IMPOSSIBLE_REFRESH", 'top');
+      });
+    },(err) => {
+      this.loading.dismiss();
+      this.isErrorLocation = true;
+    });
+  }
+
 }
 
 loadMap(latitude:number,longitude:number,stations:Station[]) {
@@ -82,22 +97,20 @@ loadMap(latitude:number,longitude:number,stations:Station[]) {
     }
   };
 
-
   this.map = GoogleMaps.create('map_canvas', mapOptions);
-
-
+  
   // Wait the MAP_READY before using any methods.
   this.map.one(GoogleMapsEvent.MAP_READY).then(() => {
     this.loading.dismiss();
     stations = this.removeDuplicate(stations);
-    stations.forEach((station) =>{
+    stations.forEach((station:Station) =>{
       this.stationsAdded.push(station);
       this.map.addMarkerSync({
         title: station.name,
         icon: 'red',
         position: {
-          lat: Number(station.latitude),
-          lng: Number(station.longitude)
+          lat: station.latitude,
+          lng: station.longitude
         },
         
       });
@@ -108,6 +121,10 @@ loadMap(latitude:number,longitude:number,stations:Station[]) {
           this.addStations(stations);
         });
       });
+
+    },(err) => {
+      this.loading.dismiss();
+      this.isErrorLocation = true;
     });
   }
 
@@ -120,8 +137,8 @@ loadMap(latitude:number,longitude:number,stations:Station[]) {
           title: station.name,
           icon: 'red',
           position: {
-            lat: Number(station.latitude),
-            lng: Number(station.longitude)
+            lat: station.latitude,
+            lng: station.longitude
           },
           
         });   

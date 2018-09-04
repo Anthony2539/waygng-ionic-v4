@@ -156,8 +156,4 @@ eventFavoris(tempsAttente?:TempsAttente){
   }
 }
 
-  goMap(){
-    this.router.navigate(['map'], {queryParams: this.station});
-  }
-
 }

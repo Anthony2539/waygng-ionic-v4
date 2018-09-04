@@ -30,6 +30,11 @@ const routes: Routes = [
         component: MapPage
       },
       {
+        path: 'map/:id',
+        outlet: 'map',
+        component: MapPage
+      },
+      {
         path: 'info',
         outlet: 'info',
         component: InfoPage
@@ -52,8 +57,8 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'map',
-    redirectTo: '/tabs/(map:map)',
+    path: 'map/:id',
+    redirectTo: '/tabs/(map:map/:id)',
     pathMatch: 'full'
   }
 ];

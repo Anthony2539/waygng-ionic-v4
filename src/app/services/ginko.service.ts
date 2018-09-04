@@ -36,7 +36,29 @@ export class GinkoService {
         }),
         catchError(this.handleError('fetchStations', []))
       );
-    }  
+    }
+    
+    fetchStation(id):Observable<any> {
+        const params = new HttpParams({
+            fromObject: {
+                id: id
+              }
+        });
+        return this.http.get<any>(this.urlGinko+"/DR/getDetailsArret.do", {params: params}).pipe(
+          map(response => {
+            const data = response.objets;
+            const s:Station = {
+                id:data.id,
+                name:data.nom,
+                latitude:data.latitude,
+                longitude:data.longitude,
+                accessiblite: data.accessiblite
+            }
+            return s;
+          }),
+          catchError(this.handleError('fetchStation', []))
+        );
+      }
 
   fetchStationsProche(latitude, longitude):Observable<any> {
     const params = new HttpParams({
