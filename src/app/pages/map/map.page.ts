@@ -48,7 +48,7 @@ initMap(id?:string){
   if(id){
     this.ginkoService.fetchStation(id).subscribe((station:Station) => {
       this.ginkoService.fetchStationsProche(station.latitude,station.longitude).subscribe((stations:Station[]) => {
-        this.loadMap(station.latitude,station.longitude,stations);
+        this.loadMap(station.latitude,station.longitude,stations, id);
       },
       (err) => {
         this.myToast.createToast("ERROR_IMPOSSIBLE_REFRESH", 'top');
@@ -79,7 +79,7 @@ initMap(id?:string){
 
 }
 
-loadMap(latitude:number,longitude:number,stations:Station[]) {
+loadMap(latitude:number,longitude:number,stations:Station[], id?:string) {
   const mapOptions: GoogleMapOptions = {
     camera: {
       target: {
@@ -105,15 +105,18 @@ loadMap(latitude:number,longitude:number,stations:Station[]) {
     stations = this.removeDuplicate(stations);
     stations.forEach((station:Station) =>{
       this.stationsAdded.push(station);
-      this.map.addMarkerSync({
+      let marker = this.map.addMarkerSync({
         title: station.name,
         icon: 'red',
         position: {
           lat: station.latitude,
           lng: station.longitude
         },
-        
       });
+      if(id && id == station.id){
+        marker.showInfoWindow(); 
+      }
+
     });
 
     this.map.on(GoogleMapsEvent.CAMERA_MOVE_END).subscribe((location) => {
