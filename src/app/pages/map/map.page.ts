@@ -4,7 +4,8 @@ import {
   GoogleMaps,
   GoogleMap,
   GoogleMapOptions,
-  GoogleMapsEvent
+  GoogleMapsEvent,
+  Marker
 } from '@ionic-native/google-maps';
 import { GinkoService } from '../../services/ginko.service';
 import { Geolocation, Geoposition } from '@ionic-native/geolocation/ngx';
@@ -105,7 +106,7 @@ loadMap(latitude:number,longitude:number,stations:Station[], id?:string) {
     stations = this.removeDuplicate(stations);
     stations.forEach((station:Station) =>{
       this.stationsAdded.push(station);
-      let marker = this.map.addMarkerSync({
+      let marker:Marker = this.map.addMarkerSync({
         title: station.name,
         icon: 'red',
         position: {
