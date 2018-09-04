@@ -45,6 +45,12 @@ export class MapPage implements OnInit {
     await this.initMap(id);
 }
 
+handleError(){
+  this.myToast.createToast("ERROR_IMPOSSIBLE_REFRESH", 'top');
+  this.loading.dismiss();
+  this.isErrorLocation = true;
+}
+
 initMap(id?:string){
   if(id){
     this.ginkoService.fetchStation(id).subscribe((station:Station) => {
@@ -52,14 +58,10 @@ initMap(id?:string){
         this.loadMap(station.latitude,station.longitude,stations, id);
       },
       (err) => {
-        this.myToast.createToast("ERROR_IMPOSSIBLE_REFRESH", 'top');
-        this.loading.dismiss();
-        this.isErrorLocation = true;
+        this.handleError();
       });
     },(err) => {
-      this.myToast.createToast("ERROR_IMPOSSIBLE_REFRESH", 'top');
-      this.loading.dismiss();
-      this.isErrorLocation = true;
+      this.handleError();
     });
     
   }else{
@@ -73,8 +75,7 @@ initMap(id?:string){
         this.myToast.createToast("ERROR_IMPOSSIBLE_REFRESH", 'top');
       });
     },(err) => {
-      this.loading.dismiss();
-      this.isErrorLocation = true;
+      this.handleError();
     });
   }
 
