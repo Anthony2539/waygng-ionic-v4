@@ -29,6 +29,7 @@ export class MapPage implements OnInit {
   map: GoogleMap;
   loading: any;
   stationsAdded:Station[];
+  myMapId:string
 
   constructor(private platform: Platform, 
               private route: ActivatedRoute, 
@@ -38,18 +39,21 @@ export class MapPage implements OnInit {
               public myToast: MyToastComponent) { }
 
   async ngOnInit() {
+
     this.stationsAdded = [];
     const opts:LoadingOptions = {message:"Chargement", translucent: true};
     this.loading = await this.loadingCtrl.create(opts);
     await this.loading.present();
     await this.platform.ready();
+    const id = this.route.snapshot.paramMap.get('id');
+    if(id){
+      this.myMapId = id+"_mapId";
+    }else{
+      this.myMapId = "mapId";
+    }
+    await this.initMap(id);
 
     
-}
-
-async ngAfterViewInit(){
-  const id = this.route.snapshot.paramMap.get('id');
-  await this.initMap(id);
 }
 
 handleError(){
@@ -106,7 +110,7 @@ loadMap(latitude:number,longitude:number,stations:Station[], id?:string) {
     }
   };
 
-  this.map = GoogleMaps.create('map_canvas', mapOptions);
+  this.map = GoogleMaps.create(this.myMapId, mapOptions);
 
   // Wait the MAP_READY before using any methods.
   this.map.one(GoogleMapsEvent.MAP_READY).then(() => {

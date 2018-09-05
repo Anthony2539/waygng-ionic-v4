@@ -79,7 +79,7 @@
     <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
         <string>Nous avons besoin de votre localisation pour trouver les stations proches de vous</string>
     </edit-config>
-    <allow-navigation href="http://192.168.1.16:8100" sessionid="59a37c91" />
+    <allow-navigation href="http://192.168.1.16:8100" sessionid="906a7e0e" />
     <engine name="browser" spec="^5.0.4" />
     <engine name="ios" spec="4.5.5" />
     <plugin name="cordova-plugin-device" spec="^2.0.2" />

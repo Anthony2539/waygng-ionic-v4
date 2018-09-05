@@ -6,5 +6,5 @@
 
 <ion-content>
     <div *ngIf="isErrorLocation" class="warning-container">{{ 'WARNING.ACTIVE_YOUR_LOCALISATION' | translate }}</div>
-    <div #map id="map_canvas"></div>
+    <div class="map_canvas" [attr.id]="myMapId"></div>
 </ion-content>
