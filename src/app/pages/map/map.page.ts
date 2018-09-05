@@ -41,8 +41,11 @@ export class MapPage implements OnInit {
     this.loading = await this.loadingCtrl.create(opts);
     await this.loading.present();
     await this.platform.ready();
-    const id = this.route.snapshot.paramMap.get('id');
-    await this.initMap(id);
+}
+
+async ngAfterViewInit(){
+  const id = this.route.snapshot.paramMap.get('id');
+  await this.initMap(id);
 }
 
 initMap(id?:string){

@@ -5,7 +5,7 @@
         </ion-buttons>
       <ion-title>{{ station?.name }}</ion-title>
       <ion-buttons slot="primary">
-            <ion-button [href]="'/map/' + station.id">
+            <ion-button [href]="'/map/' + station.id" routerDirection="forward">
                 <ion-icon slot="end" name="pin"></ion-icon>
             </ion-button>
         </ion-buttons>
