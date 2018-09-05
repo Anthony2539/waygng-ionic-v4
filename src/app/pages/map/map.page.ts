@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Platform, LoadingController } from '@ionic/angular';
 import {
   GoogleMaps,
@@ -22,6 +22,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class MapPage implements OnInit {
 
+  @ViewChild('map') elementView: ElementRef;
+
   station:Station;
   isErrorLocation:boolean=false;
   map: GoogleMap;
@@ -41,6 +43,8 @@ export class MapPage implements OnInit {
     this.loading = await this.loadingCtrl.create(opts);
     await this.loading.present();
     await this.platform.ready();
+
+    
 }
 
 async ngAfterViewInit(){
@@ -103,7 +107,7 @@ loadMap(latitude:number,longitude:number,stations:Station[], id?:string) {
   };
 
   this.map = GoogleMaps.create('map_canvas', mapOptions);
-  
+
   // Wait the MAP_READY before using any methods.
   this.map.one(GoogleMapsEvent.MAP_READY).then(() => {
     this.loading.dismiss();
