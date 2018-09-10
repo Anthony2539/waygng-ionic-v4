@@ -7,6 +7,7 @@ import { MyToastComponent } from '../../components/my-toast/my-toast.component';
 import { TempsAttenteFav } from '../../models/temps-attente-fav';
 import { FavorisService } from '../../services/favoris.service';
 import { take } from 'rxjs/operators';
+import { Location } from '@angular/common';
 
 @Component({ 
   selector: 'app-station',
@@ -27,11 +28,16 @@ export class StationPage implements OnInit {
               private ginkoService: GinkoService, 
               private favorisService: FavorisService,
               private router: Router,
+              private location: Location,
               public myToast: MyToastComponent) { }
 
   ngOnInit() {
     this.station = this.route.snapshot.queryParams as Station;
     this.fetchStationTemps();
+  }
+
+  goBack(){
+    this.location.back();
   }
 
   doRefresh(refresher) {
