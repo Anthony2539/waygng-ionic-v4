@@ -10,9 +10,9 @@ import { SearchListeTemps } from '../../models/search-liste-temps';
 import { TempsAttenteFav } from '../../models/temps-attente-fav';
 import { StationAttente } from '../../models/station-attente';
 import { TempsAttente } from '../../models/temps-attente';
-import { AdMobPro } from '@ionic-native/admob-pro/ngx';
 import { Router } from '@angular/router';
 import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
+import { AdMobFree , AdMobFreeInterstitialConfig} from '@ionic-native/admob-free/ngx';
 
 
 @Component({
@@ -35,7 +35,7 @@ export class HomePage {
   constructor(
     private platform: Platform,
     private ga: GoogleAnalytics,
-    private admob: AdMobPro,
+    private adMobFree: AdMobFree,
     public auth: AuthService,
     private router: Router,
     public myToast: MyToastComponent,
@@ -48,21 +48,34 @@ export class HomePage {
 
   ngOnInit() {
     this.ga.trackView('Home page');
-    let adId;
+
+    let interstitialConfig: AdMobFreeInterstitialConfig = {};
     if(this.platform.is('android')) {
-      adId = 'YOUR_ADID_ANDROID';
+
     } else if (this.platform.is('ios')) {
-      adId = 'ca-app-pub-6685491124399341/1681544035';
+      interstitialConfig = {
+        id:'ca-app-pub-6685491124399341/2999824124',
+        isTesting: true,
+        autoShow: false
+       }
     }
 
-    this.admob.prepareInterstitial({adId: adId}).then(() => {
-       this.admob.showInterstitial(); 
+    this.adMobFree.interstitial.config(interstitialConfig);
+    this.platform.ready().then(() => {
+      this.adMobFree.interstitial.prepare().then(() => {
+        // banner Ad is ready
+        // if we set autoShow to false, then we will need to call the show method here
+        setTimeout(() => {
+          this.adMobFree.interstitial.show();
+        },2000)
+      }).catch(e => {
+        console.log(e);
       });
-
-    this.admob.onAdDismiss().subscribe(() => { 
-      this.fetchStationProches();
-      this.getFavoris();
     });
+    
+
+    this.fetchStationProches();
+    this.getFavoris();
   }
 
   doRefresh(refresher){
