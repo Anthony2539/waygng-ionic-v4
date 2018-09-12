@@ -5,6 +5,8 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Globalization } from '@ionic-native/globalization/ngx';
 import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
+import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
+import { AppVersion } from '@ionic-native/app-version/ngx';
 
 @Component({
   selector: 'app-root',
@@ -13,16 +15,27 @@ import * as moment from 'moment';
 export class AppComponent {
   constructor(
     private platform: Platform,
+    private appVersion: AppVersion,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private globalization: Globalization,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private ga: GoogleAnalytics
   ) {
     this.initializeApp(); 
   } 
 
   initializeApp() {
     this.platform.ready().then(() => {
+
+      // google analytics
+      this.ga.startTrackerWithId('UA-125580859-1').then(() => {
+        this.appVersion.getVersionCode().then((version:any) => {
+          this.ga.setAppVersion(version);
+        });
+        // Tracker is ready
+        // You can now track pages or set additional information such as AppVersion or UserId
+      }).catch(e => console.log('Error starting GoogleAnalytics', e));
 
       // this language will be used as a fallback when a translation isn't found in the current language
       this.translate.setDefaultLang('fr');   

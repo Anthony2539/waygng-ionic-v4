@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Station } from '../../models/station';
 import { GinkoService } from '../../services/ginko.service';
+import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 
 @Component({
   selector: 'app-search',
@@ -16,9 +17,12 @@ export class SearchPage implements OnInit {
   stations: Station[] = [];
   loading: any = false;
 
-  constructor(private ginkoService: GinkoService, private router: Router) { }
+  constructor(private ginkoService: GinkoService,
+              private ga: GoogleAnalytics, 
+              private router: Router) { }
 
   ngOnInit() {
+    this.ga.trackView('Search page');
     this.getStations(); 
   }
 

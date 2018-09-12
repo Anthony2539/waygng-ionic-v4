@@ -14,6 +14,7 @@ import { Station } from '../../models/station';
 import * as _ from 'lodash';
 import { LoadingOptions } from '@ionic/core';
 import { ActivatedRoute } from '@angular/router';
+import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 
 @Component({
   selector: 'app-map',
@@ -31,7 +32,8 @@ export class MapPage implements OnInit {
   stationsAdded:Station[];
   myMapId:string
 
-  constructor(private platform: Platform, 
+  constructor(private platform: Platform,
+              private ga: GoogleAnalytics,  
               private route: ActivatedRoute, 
               private ginkoService: GinkoService, 
               public geolocation: Geolocation,
@@ -39,7 +41,7 @@ export class MapPage implements OnInit {
               public myToast: MyToastComponent) { }
 
   async ngOnInit() {
-
+    this.ga.trackView('Map page');
     this.stationsAdded = [];
     const opts:LoadingOptions = {message:"Chargement", translucent: true};
     this.loading = await this.loadingCtrl.create(opts);

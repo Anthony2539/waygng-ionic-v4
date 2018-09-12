@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Platform } from '@ionic/angular';
 import { AuthService } from '../../services/auth.service';
 import { FavorisService } from '../../services/favoris.service';
 import { Station } from '../../models/station';
@@ -9,7 +10,10 @@ import { SearchListeTemps } from '../../models/search-liste-temps';
 import { TempsAttenteFav } from '../../models/temps-attente-fav';
 import { StationAttente } from '../../models/station-attente';
 import { TempsAttente } from '../../models/temps-attente';
+import { AdMobPro } from '@ionic-native/admob-pro/ngx';
 import { Router } from '@angular/router';
+import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
+
 
 @Component({
   selector: 'app-home',
@@ -29,6 +33,9 @@ export class HomePage {
   isErrorLocation:boolean = false;
 
   constructor(
+    private platform: Platform,
+    private ga: GoogleAnalytics,
+    private admob: AdMobPro,
     public auth: AuthService,
     private router: Router,
     public myToast: MyToastComponent,
@@ -40,8 +47,22 @@ export class HomePage {
 }
 
   ngOnInit() {
-    this.fetchStationProches();
-    this.getFavoris();
+    this.ga.trackView('Home page');
+    let adId;
+    if(this.platform.is('android')) {
+      adId = 'YOUR_ADID_ANDROID';
+    } else if (this.platform.is('ios')) {
+      adId = 'ca-app-pub-6685491124399341/1681544035';
+    }
+
+    this.admob.prepareInterstitial({adId: adId}).then(() => {
+       this.admob.showInterstitial(); 
+      });
+
+    this.admob.onAdDismiss().subscribe(() => { 
+      this.fetchStationProches();
+      this.getFavoris();
+    });
   }
 
   doRefresh(refresher){

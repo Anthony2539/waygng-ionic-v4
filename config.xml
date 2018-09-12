@@ -3,7 +3,7 @@
     <name>Waygng</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="riefolo.anthony@gmail.com" href="http://ionicframework.com/">Anthony Riefolo</author>
-    <content original-src="index.html" src="http://192.168.1.16:8100" />
+    <content original-src="index.html" src="http://10.21.20.25:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -80,13 +80,17 @@
         <string>Nous avons besoin de votre localisation pour trouver les stations proches de vous</string>
     </edit-config>
     <allow-navigation href="http://192.168.1.16:8100" sessionid="906a7e0e" />
+    <allow-navigation href="http://10.21.20.25:8100" sessionid="d653d609" />
     <engine name="browser" spec="^5.0.4" />
     <engine name="ios" spec="4.5.5" />
+    <plugin name="cordova-plugin-admobpro" spec="^2.31.6" />
+    <plugin name="cordova-plugin-app-version" spec="^0.1.9" />
     <plugin name="cordova-plugin-device" spec="^2.0.2" />
     <plugin name="cordova-plugin-geolocation" spec="^4.0.1">
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="To locate you" />
     </plugin>
     <plugin name="cordova-plugin-globalization" spec="^1.11.0" />
+    <plugin name="cordova-plugin-google-analytics" spec="^1.8.6" />
     <plugin name="cordova-plugin-googlemaps" spec="^2.4.1">
         <variable name="API_KEY_FOR_ANDROID" value="AIzaSyCYb5LKTNbtKxDSXPseyPj_3v_e35D_m-o" />
         <variable name="API_KEY_FOR_IOS" value="AIzaSyCYb5LKTNbtKxDSXPseyPj_3v_e35D_m-o" />

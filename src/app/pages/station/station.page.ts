@@ -8,6 +8,7 @@ import { TempsAttenteFav } from '../../models/temps-attente-fav';
 import { FavorisService } from '../../services/favoris.service';
 import { take } from 'rxjs/operators';
 import { Location } from '@angular/common';
+import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 
 @Component({ 
   selector: 'app-station',
@@ -25,14 +26,15 @@ export class StationPage implements OnInit {
   isInfavoris:boolean = false;
 
   constructor(private route: ActivatedRoute, 
+              private ga: GoogleAnalytics,
               private ginkoService: GinkoService, 
               private favorisService: FavorisService,
-              private router: Router,
               private location: Location,
               public myToast: MyToastComponent) { }
 
   ngOnInit() {
     this.station = this.route.snapshot.queryParams as Station;
+    this.ga.trackView('Station page: '+this.station.name);
     this.fetchStationTemps();
   }
 

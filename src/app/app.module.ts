@@ -11,6 +11,9 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Globalization } from '@ionic-native/globalization/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { AdMobPro } from '@ionic-native/admob-pro/ngx';
+import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
+import { AppVersion } from '@ionic-native/app-version/ngx';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -61,6 +64,9 @@ export function createTranslateLoader(http: HttpClient) {
     MyToastComponent,
     Geolocation,
     Globalization,
+    AdMobPro,
+    GoogleAnalytics,
+    AppVersion,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

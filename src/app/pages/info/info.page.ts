@@ -5,6 +5,7 @@ import { MyToastComponent } from '../../components/my-toast/my-toast.component';
 import { InfosTrafic } from '../../models/infos-trafic';
 import { PopoverController } from '@ionic/angular';
 import { GinkoInfoComponent } from '../../components/ginko-info/ginko-info.component';
+import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 
 @Component({
   selector: 'app-info',
@@ -17,9 +18,13 @@ export class InfoPage implements OnInit {
   loading: boolean = false;
   infosTrafic: Observable<InfosTrafic>;
 
-  constructor(private ginkoService:GinkoService, public myToast: MyToastComponent, public popoverController: PopoverController) { }
+  constructor(private ginkoService:GinkoService,
+              private ga: GoogleAnalytics, 
+              public myToast: MyToastComponent, 
+              public popoverController: PopoverController) { }
 
   ngOnInit() {
+    this.ga.trackView('Info page');
     this.getInfosTrafic();
   }
 
