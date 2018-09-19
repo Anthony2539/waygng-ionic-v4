@@ -9,13 +9,13 @@
       <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-list no-margin>
+  <ion-list #slidingList no-margin>
     <ion-list-header color="light">
       <ion-icon name="star"></ion-icon><ion-label padding-start>{{ 'FAVORIS' | translate }}</ion-label>
       <ion-text margin-end text-lowercase text-wrap style="font-size: 10px">{{dateLastUpdate | formatDate:'calendar'}}</ion-text>
       <my-header-loader *ngIf="loadFavoris"></my-header-loader>
     </ion-list-header>
-    <div *ngIf="favoris?.length==0 && !loadFavoris" class="warning-container">{{ 'WARNING.EMPTY_FAV' | translate }}</div>
+    <div *ngIf="favoris?.length==0 && tempsAttenteFavs?.length == 0 && !loadFavoris" class="warning-container">{{ 'WARNING.EMPTY_FAV' | translate }}</div>
 
     <ion-item-sliding *ngFor="let tempsAttenteFav of tempsAttenteFavs">
         <ion-item button (click)="itemSelected(tempsAttenteFav.station)">

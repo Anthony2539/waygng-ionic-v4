@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Platform } from '@ionic/angular';
+import { Component, ViewChild } from '@angular/core';
+import { Platform, List } from '@ionic/angular';
 import { AuthService } from '../../services/auth.service';
 import { FavorisService } from '../../services/favoris.service';
 import { Station } from '../../models/station';
@@ -22,6 +22,8 @@ import { AdMobFree , AdMobFreeInterstitialConfig} from '@ionic-native/admob-free
 })
 export class HomePage {
 
+  @ViewChild('slidingList') slidingList: List;
+  
   loadFavoris: boolean = false;
   favoris: any[] = [];
   loadStationProche: boolean = false;
@@ -55,7 +57,7 @@ export class HomePage {
     } else if (this.platform.is('ios')) {
       interstitialConfig = {
         id:'ca-app-pub-6685491124399341/2999824124',
-        isTesting: true,
+        isTesting: false,
         autoShow: false
        }
     }
@@ -153,12 +155,14 @@ export class HomePage {
     });
   } 
 
-  removeFavoris(fav:Station){
+  async removeFavoris(fav:Station){
     this.favorisService.removeFavoris(fav.name);
+    await this.slidingList.closeSlidingItems();
   }
 
-  removeTempsAttenteFavoris(tempsAttenteFav:TempsAttenteFav){
+  async removeTempsAttenteFavoris(tempsAttenteFav:TempsAttenteFav){
     this.favorisService.removeFavorisTempsAttente(tempsAttenteFav);
+    await this.slidingList.closeSlidingItems();
   }
 
   itemSelected(station){
