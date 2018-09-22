@@ -120,6 +120,7 @@ loadMap(latitude:number,longitude:number,stations:Station[], id?:string) {
     stations = this.removeDuplicate(stations);
     stations.forEach((station:Station) =>{
       this.stationsAdded.push(station);
+
       let marker:Marker = this.map.addMarkerSync({
         title: station.name,
         icon: 'red',

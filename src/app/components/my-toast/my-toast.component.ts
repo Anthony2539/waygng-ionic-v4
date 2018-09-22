@@ -29,7 +29,7 @@ export class MyToastComponent implements OnInit {
   } 
 
  private async presentToast(message:string, position:string){
-   const opts:ToastOptions = {message:message, duration: 3000};
+   const opts:ToastOptions = {message:message, duration: 2000};
    if(position == "top"){
     opts.position = "top";
    }else if(position == "bottom"){

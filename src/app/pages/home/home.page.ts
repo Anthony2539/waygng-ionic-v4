@@ -49,14 +49,19 @@ export class HomePage {
 }
 
   ngOnInit() {
-    this.ga.trackView('Home page');
+    this.ga.trackView('Home page');    
+    this.showInterstitialAd();
+    this.fetchStationProches();
+    this.getFavoris();
+  }
 
+  showInterstitialAd(){
     let interstitialConfig: AdMobFreeInterstitialConfig = {};
     if(this.platform.is('android')) {
 
     } else if (this.platform.is('ios')) {
       interstitialConfig = {
-        id:'ca-app-pub-6685491124399341/2999824124',
+        id:'ca-app-pub-6685491124399341/4886403246',
         isTesting: false,
         autoShow: false
        }
@@ -74,10 +79,6 @@ export class HomePage {
         console.log(e);
       });
     });
-    
-
-    this.fetchStationProches();
-    this.getFavoris();
   }
 
   doRefresh(refresher){

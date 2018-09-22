@@ -20,6 +20,8 @@ import { AppComponent } from './app.component';
 
 
 import { FIREBASE_CONFIG } from './app.firebase.config'; 
+import { FIREBASE_CONFIG_PROD } from './app.firebase.config'; 
+
 
 // ANGULAR FIRE
 import { AngularFireModule } from 'angularfire2';
@@ -53,7 +55,7 @@ export function createTranslateLoader(http: HttpClient) {
               }
             }),
             AngularFirestoreModule,
-            AngularFireModule.initializeApp(FIREBASE_CONFIG),
+            AngularFireModule.initializeApp(FIREBASE_CONFIG_PROD),
             AngularFireAuthModule,
             AngularFireDatabaseModule,
             AppRoutingModule
