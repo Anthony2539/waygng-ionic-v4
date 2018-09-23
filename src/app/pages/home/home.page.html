@@ -9,7 +9,7 @@
       <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-list no-margin>
+  <ion-list #slidingList no-margin>
     <ion-list-header color="light">
       <ion-icon name="star"></ion-icon><ion-label padding-start>{{ 'FAVORIS' | translate }}</ion-label>
       <ion-text margin-end text-lowercase text-wrap style="font-size: 10px">{{dateLastUpdate | formatDate:'calendar'}}</ion-text>

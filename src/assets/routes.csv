@@ -1,0 +1,14 @@
+route_id,agency_id,route_short_name,route_long_name,route_type,route_color,route_text_color
+10,2427153,10,CHRU Minjoz <> Chaffanjon,3,CECB00,000000
+101,2427153,1,Hauts du Chazal <> Chalezeule,0,00A5C2,FFFFFF
+102,2427153,2,Hauts du Chazal <> Gare Viotte,0,006D78,FFFFFF
+11,2427153,11,Rivotte <> Combe Saragosse,3,C592BE,FFFFFF
+12,2427153,12,Pôle Temis <> Prés de Vaux,3,7BC6BC,000000
+27,2427153,27,Pôle Chamars <> Citadelle,3,F26522,ffffff
+3,2427153,3,Pôle Temis <> Centre-ville - 8 Septembre,3,006AB3,FFFFFF
+4,2427153,4,Châteaufarine <> Pôle Orchamps,3,E2001A,FFFFFF
+5,2427153,5,St Claude <> Bregille,3,1FA22E,FFFFFF
+6,2427153,6,Founottes <> Pôle Temis <> Pôle Orchamps,3,FFE500,000000
+7,2427153,7,Hauts du Chazal <> Palente Espace Industriel,3,A74C21,FFFFFF
+8,2427153,8,Centre-ville - Battant  <> Espace Valentin,3,00396B,FFFFFF
+9,2427153,9,Tilleroyes <> Velotte,3,F29400,FFFFFF

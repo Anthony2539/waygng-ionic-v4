@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Platform } from '@ionic/angular';
+import { Component, ViewChild } from '@angular/core';
+import { Platform, List } from '@ionic/angular';
 import { AuthService } from '../../services/auth.service';
 import { FavorisService } from '../../services/favoris.service';
 import { Station } from '../../models/station';
@@ -13,6 +13,9 @@ import { TempsAttente } from '../../models/temps-attente';
 import { Router } from '@angular/router';
 import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 import { AdMobFree , AdMobFreeInterstitialConfig} from '@ionic-native/admob-free/ngx';
+import { GtfsService } from '../../services/gtfs.service';
+import { SpotTime } from '../../models/stopTime';
+import * as _ from 'lodash';
 
 
 @Component({
@@ -20,7 +23,10 @@ import { AdMobFree , AdMobFreeInterstitialConfig} from '@ionic-native/admob-free
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss']
 })
+
 export class HomePage {
+
+  @ViewChild('slidingList') slidingList: List;
 
   loadFavoris: boolean = false;
   favoris: any[] = [];
@@ -32,7 +38,10 @@ export class HomePage {
   dateLastUpdate: number;
   isErrorLocation:boolean = false;
 
+
+
   constructor(
+    private gtfsService:GtfsService,
     private platform: Platform,
     private ga: GoogleAnalytics,
     private adMobFree: AdMobFree,
@@ -72,11 +81,15 @@ export class HomePage {
         console.log(e);
       });
     });
-    
 
+    this.gtfsService.fetchSchedule("102","t_allen1","0").then((spotTimes:SpotTime[]) => {
+      spotTimes = _.orderBy(spotTimes, function(o) { return o.departure_time; }, ['asc']);
+      console.log(spotTimes);
+    });
     this.fetchStationProches();
     this.getFavoris();
   }
+
 
   doRefresh(refresher){
     this.fetchStationProches(refresher);
@@ -153,12 +166,14 @@ export class HomePage {
     });
   } 
 
-  removeFavoris(fav:Station){
+  async removeFavoris(fav:Station){
     this.favorisService.removeFavoris(fav.name);
+    await this.slidingList.closeSlidingItems();
   }
 
-  removeTempsAttenteFavoris(tempsAttenteFav:TempsAttenteFav){
+  async removeTempsAttenteFavoris(tempsAttenteFav:TempsAttenteFav){
     this.favorisService.removeFavorisTempsAttente(tempsAttenteFav);
+    await this.slidingList.closeSlidingItems();
   }
 
   itemSelected(station){
