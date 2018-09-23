@@ -27,7 +27,7 @@ import * as _ from 'lodash';
 export class HomePage {
 
   @ViewChild('slidingList') slidingList: List;
-
+  
   loadFavoris: boolean = false;
   favoris: any[] = [];
   loadStationProche: boolean = false;
@@ -57,37 +57,27 @@ export class HomePage {
 
   ngOnInit() {
     this.ga.trackView('Home page');
+    this.platform.ready().then(() => {    
+      this.showInterstitialAd();
+      this.fetchStationProches();
+      this.getFavoris();
+    });
+  }
 
+  showInterstitialAd(){
     let interstitialConfig: AdMobFreeInterstitialConfig = {};
     if(this.platform.is('android')) {
 
     } else if (this.platform.is('ios')) {
       interstitialConfig = {
-        id:'ca-app-pub-6685491124399341/2999824124',
-        isTesting: true,
-        autoShow: false
+        id:'ca-app-pub-6685491124399341/4886403246',
+        isTesting: false,
+        autoShow: true
        }
     }
 
     this.adMobFree.interstitial.config(interstitialConfig);
-    this.platform.ready().then(() => {
-      this.adMobFree.interstitial.prepare().then(() => {
-        // banner Ad is ready
-        // if we set autoShow to false, then we will need to call the show method here
-        setTimeout(() => {
-          this.adMobFree.interstitial.show();
-        },2000)
-      }).catch(e => {
-        console.log(e);
-      });
-    });
-
-    this.gtfsService.fetchSchedule("102","t_allen1","0").then((spotTimes:SpotTime[]) => {
-      spotTimes = _.orderBy(spotTimes, function(o) { return o.departure_time; }, ['asc']);
-      console.log(spotTimes);
-    });
-    this.fetchStationProches();
-    this.getFavoris();
+    this.adMobFree.interstitial.prepare();
   }
 
 

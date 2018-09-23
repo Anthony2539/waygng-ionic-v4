@@ -5,7 +5,8 @@ import {
   GoogleMap,
   GoogleMapOptions,
   GoogleMapsEvent,
-  Marker
+  Marker,
+  HtmlInfoWindow
 } from '@ionic-native/google-maps';
 import { GinkoService } from '../../services/ginko.service';
 import { Geolocation, Geoposition } from '@ionic-native/geolocation/ngx';
@@ -13,7 +14,7 @@ import { MyToastComponent } from '../../components/my-toast/my-toast.component';
 import { Station } from '../../models/station';
 import * as _ from 'lodash';
 import { LoadingOptions } from '@ionic/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 
 @Component({
@@ -33,7 +34,8 @@ export class MapPage implements OnInit {
   myMapId:string
 
   constructor(private platform: Platform,
-              private ga: GoogleAnalytics,  
+              private ga: GoogleAnalytics,
+              private router: Router,  
               private route: ActivatedRoute, 
               private ginkoService: GinkoService, 
               public geolocation: Geolocation,
@@ -120,18 +122,7 @@ loadMap(latitude:number,longitude:number,stations:Station[], id?:string) {
     stations = this.removeDuplicate(stations);
     stations.forEach((station:Station) =>{
       this.stationsAdded.push(station);
-      let marker:Marker = this.map.addMarkerSync({
-        title: station.name,
-        icon: 'red',
-        position: {
-          lat: station.latitude,
-          lng: station.longitude
-        },
-      });
-      if(id && id == station.id){
-        marker.showInfoWindow(); 
-      }
-
+      this.handleMarker(station,stations); 
     });
 
     this.map.on(GoogleMapsEvent.CAMERA_MOVE_END).subscribe((location) => {
@@ -150,19 +141,42 @@ loadMap(latitude:number,longitude:number,stations:Station[], id?:string) {
     stations = this.removeDuplicate(stations);
     // Now you can use all methods safely.
     stations.forEach((station) =>{
-      if(!_.find(this.stationsAdded, station)){
-        this.map.addMarkerSync({
-          title: station.name,
-          icon: 'red',
-          position: {
-            lat: station.latitude,
-            lng: station.longitude
-          },
-          
-        });   
+      if(!_.find(this.stationsAdded, {name:station.name})){
+        this.handleMarker(station,stations); 
         this.stationsAdded.push(station);
       }
     });
+  }
+
+  handleMarker(station:Station,stations:Station[]){
+    let infoWindow = new HtmlInfoWindow();
+          
+    var div = document.createElement('div');
+    div.innerHTML=station.name;
+    div.style.cssText = 'text-align:center; width:100px';
+    div.id = station.id;
+    var self = this;
+    div.addEventListener("click", function (event) {
+      let currentStation = _.find(stations,{id:this.id});
+      if(currentStation){
+        self.router.navigate(['station'], {queryParams: currentStation}); 
+      }
+    });
+    
+    infoWindow.setContent(div);
+
+    this.map.addMarker({
+      icon: 'red',
+      position: {
+        lat: station.latitude,
+        lng: station.longitude
+      },
+      
+    }).then((marker:Marker) => {
+      marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
+        infoWindow.open(marker);
+      });
+    });  
   }
 
   removeDuplicate(stations:Station[]):Station[]{

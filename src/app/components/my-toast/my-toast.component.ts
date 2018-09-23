@@ -28,13 +28,9 @@ export class MyToastComponent implements OnInit {
     });
   } 
 
- private async presentToast(message:string, position:string){
-   const opts:ToastOptions = {message:message, duration: 3000};
-   if(position == "top"){
-    opts.position = "top";
-   }else if(position == "bottom"){
-     opts.position = "bottom";
-   }
+ private async presentToast(message:string, position:any){
+   const opts:ToastOptions = {message:message, duration: 2000};
+   opts.position = position;
     const toast = await this.toastCtrl.create(opts);
     toast.present();
   }

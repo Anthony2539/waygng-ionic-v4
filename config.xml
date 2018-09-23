@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.waygetandgo" version="3.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.waygetandgo" version="3.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Waygng</name>
-    <description>An awesome Ionic/Cordova app.</description>
+    <description>consulter les prochains horaires de passage à la station</description>
     <author email="riefolo.anthony@gmail.com" href="http://ionicframework.com/">Anthony Riefolo</author>
     <content src="index.html" />
     <access origin="*" />

@@ -20,6 +20,8 @@ import { AppComponent } from './app.component';
 
 
 import { FIREBASE_CONFIG } from './app.firebase.config'; 
+import { FIREBASE_CONFIG_PROD } from './app.firebase.config'; 
+
 
 // ANGULAR FIRE
 import { AngularFireModule } from 'angularfire2';
