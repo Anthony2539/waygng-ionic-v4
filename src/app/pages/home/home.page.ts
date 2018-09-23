@@ -63,21 +63,13 @@ export class HomePage {
       interstitialConfig = {
         id:'ca-app-pub-6685491124399341/4886403246',
         isTesting: false,
-        autoShow: false
+        autoShow: true
        }
     }
 
     this.adMobFree.interstitial.config(interstitialConfig);
     this.platform.ready().then(() => {
-      this.adMobFree.interstitial.prepare().then(() => {
-        // banner Ad is ready
-        // if we set autoShow to false, then we will need to call the show method here
-        setTimeout(() => {
-          this.adMobFree.interstitial.show();
-        },2000)
-      }).catch(e => {
-        console.log(e);
-      });
+      this.adMobFree.interstitial.prepare();
     });
   }
 

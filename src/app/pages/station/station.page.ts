@@ -143,22 +143,22 @@ eventFavoris(tempsAttente?:TempsAttente){
     if(tempsAttente.isInfavoris){
       tempsAttente.isInfavoris = false;
       this.favorisService.removeFavorisTempsAttente(tempsAttenteFav);
-      this.myToast.createToast('REMOVED_FAVORITES','top',tempsAttenteFav.destination);
+      this.myToast.createToast('REMOVED_FAVORITES','bottom',tempsAttenteFav.destination);
     }else{
       tempsAttente.isInfavoris = true;
       this.favorisService.addFavorisTempsAttente(tempsAttenteFav);
-      this.myToast.createToast('ADDED_FAVORITES','top',tempsAttenteFav.destination);
+      this.myToast.createToast('ADDED_FAVORITES','bottom',tempsAttenteFav.destination);
     }
 
   }else{
     if(this.isInfavoris){
       this.isInfavoris = false;
       this.favorisService.removeFavoris(this.nomExact);
-      this.myToast.createToast('REMOVED_FAVORITES','top',this.nomExact);
+      this.myToast.createToast('REMOVED_FAVORITES','bottom',this.nomExact);
     }else{
       this.isInfavoris = true;
       this.favorisService.addFavoris(this.station).then(() => {
-        this.myToast.createToast('ADDED_FAVORITES','top',this.nomExact);
+        this.myToast.createToast('ADDED_FAVORITES','bottom',this.nomExact);
       })
     }
   }
