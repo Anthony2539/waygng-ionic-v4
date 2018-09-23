@@ -49,10 +49,12 @@ export class HomePage {
 }
 
   ngOnInit() {
-    this.ga.trackView('Home page');    
-    this.showInterstitialAd();
-    this.fetchStationProches();
-    this.getFavoris();
+    this.ga.trackView('Home page');
+    this.platform.ready().then(() => {    
+      this.showInterstitialAd();
+      this.fetchStationProches();
+      this.getFavoris();
+    });
   }
 
   showInterstitialAd(){
@@ -68,9 +70,7 @@ export class HomePage {
     }
 
     this.adMobFree.interstitial.config(interstitialConfig);
-    this.platform.ready().then(() => {
-      this.adMobFree.interstitial.prepare();
-    });
+    this.adMobFree.interstitial.prepare();
   }
 
   doRefresh(refresher){
