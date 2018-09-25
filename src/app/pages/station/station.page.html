@@ -34,7 +34,7 @@
           <div *ngIf="!loading && station && listeTemps.length == 0"class="warning-container">{{ 'WARNING.NO_PLANNED_PASSAGE' | translate }}</div>
 
           <div class="tempsAttenteContainer" *ngFor="let tempsAttente of listeTemps">
-            <ion-item no-padding lines="none">
+            <ion-item no-padding lines="none" (click)="goSchedule(tempsAttente)">
                 <ion-thumbnail slot="start" class="numLigne"  style.color="#{{tempsAttente.couleurTexte}}" style.background-color="#{{tempsAttente.couleurFond}}">
                     {{tempsAttente.numLignePublic}}
                 </ion-thumbnail>

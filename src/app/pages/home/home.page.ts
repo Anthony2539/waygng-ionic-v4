@@ -13,8 +13,6 @@ import { TempsAttente } from '../../models/temps-attente';
 import { Router } from '@angular/router';
 import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 import { AdMobFree , AdMobFreeInterstitialConfig} from '@ionic-native/admob-free/ngx';
-import { GtfsService } from '../../services/gtfs.service';
-import { SpotTime } from '../../models/stopTime';
 import * as _ from 'lodash';
 
 
@@ -41,7 +39,6 @@ export class HomePage {
 
 
   constructor(
-    private gtfsService:GtfsService,
     private platform: Platform,
     private ga: GoogleAnalytics,
     private adMobFree: AdMobFree,
@@ -57,7 +54,7 @@ export class HomePage {
 
   ngOnInit() {
     this.ga.trackView('Home page');
-    this.platform.ready().then(() => {    
+    this.platform.ready().then(() => { 
       this.showInterstitialAd();
       this.fetchStationProches();
       this.getFavoris();

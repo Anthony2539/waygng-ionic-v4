@@ -26,6 +26,7 @@ export class StationPage implements OnInit {
   isInfavoris:boolean = false;
 
   constructor(private route: ActivatedRoute, 
+              private router: Router,
               private ga: GoogleAnalytics,
               private ginkoService: GinkoService, 
               private favorisService: FavorisService,
@@ -162,6 +163,22 @@ eventFavoris(tempsAttente?:TempsAttente){
       })
     }
   }
+}
+
+goSchedule(tempsAttente:TempsAttente){
+  let request = {idLigne:tempsAttente.idLigne,
+                idArret:tempsAttente.idArret, 
+                sensAller:"1",
+                numLignePublic:tempsAttente.numLignePublic,
+                couleurTexte:tempsAttente.couleurTexte,
+                couleurFond:tempsAttente.couleurFond,
+                destination:tempsAttente.destination,
+                precisionDestination:tempsAttente.precisionDestination,
+                stationName:this.station.name};
+  if(tempsAttente.sensAller){
+    request.sensAller = "0";
+  }
+  this.router.navigate(['schedule'], {queryParams: request});
 }
 
 }

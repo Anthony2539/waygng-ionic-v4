@@ -1,0 +1,19 @@
+.numLigne{
+    text-align: center;
+    font-weight: bold;
+    border-radius: 2px;
+    padding: 0px !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 40px;
+    max-height: 40px;
+    margin-bottom: 0px !important;
+    margin-top: 0px !important;
+}
+
+.infoLineContainer{
+    box-shadow: 1px 2px 3px 0px rgba(0, 0, 0, 0.3);
+    margin: 15px;
+    margin-top: 25px;
+}

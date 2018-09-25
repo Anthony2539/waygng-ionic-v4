@@ -11,7 +11,8 @@
         "NOTIFICATIONS": "Notifications",
         "MAP":"Nearby",
         "LOGIN": "Welcome",
-        "PRICE": "Price"
+        "PRICE": "Price",
+        "SCHEDULE": "Schedules"
     },
 
     "MENU":{

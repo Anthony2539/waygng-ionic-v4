@@ -3,22 +3,17 @@
         "TIMETABLE": "Horaires",
         "FAVORIS": "Favoris",
         "TRAFFIC_INFO": "Info trafic",
-        "SPOTS": "Spots",
-        "SEND_SPOT": "Envoyer un spot",
-        "THEY_LIKED": "Ils ont aimé",
         "PROFILE": "Profil",
-        "SPOT": "Spot",
         "NOTIFICATIONS": "Notifications",
         "MAP":"À proximité",
-        "LOGIN": "Bienvenue",
-        "PRICE": "Tarif"
+        "PRICE": "Tarif",
+        "SCHEDULE": "Fiche horaires"
     },
 
     "MENU":{
         "TIMETABLE": "Horaires",
         "FAVORIS": "Favoris",
         "TRAFFIC_INFO": "Info trafic",
-        "SPOTS": "Spots",
         "NOTIFICATIONS": "Notifications",
         "MAP":"À proximité",
         "PRICE_TRANSPORT" : "Tarif"
