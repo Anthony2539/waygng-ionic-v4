@@ -67,8 +67,8 @@ export class GtfsService {
           return filter.map((spotTime:SpotTime)  => {
              const s: SpotTime = {
               trip_id:spotTime.trip_id,
-              arrival_time:moment(spotTime.arrival_time, "HH.mm.ss"),
-              departure_time:moment(spotTime.departure_time, "HH.mm.ss"),
+              arrival_time:moment(spotTime.arrival_time, "kk:mm:ss"),
+              departure_time:moment(spotTime.departure_time, "kk:mm:ss"),
               stop_id:spotTime.stop_id,
               stop_sequence:spotTime.stop_sequence,
               stop_headsign:spotTime.stop_headsign,

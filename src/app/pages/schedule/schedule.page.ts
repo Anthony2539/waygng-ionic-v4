@@ -2,8 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { GtfsService } from '../../services/gtfs.service';
 import { SpotTime } from '../../models/stopTime';
-import * as _ from 'lodash';
 import { ActivatedRoute } from '@angular/router';
+import * as _ from 'lodash';
+import * as moment from 'moment';
+
+interface Schedule{
+  hour:string;
+  minutes:string[];
+}
 
 @Component({
   selector: 'app-schedule',
@@ -12,19 +18,37 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class SchedulePage implements OnInit {
 
+  today:string;
   infoLine:any;
   stationName:string;
+  schedules:Schedule[] = [];
+  loading:boolean = false;
 
   constructor(private route: ActivatedRoute, 
               private location: Location,
               private gtfsService:GtfsService) { }
 
   ngOnInit() {
+    this.loading = true;
+    this.today = moment().format("dddd");
     this.infoLine = this.route.snapshot.queryParams;
     this.stationName = this.infoLine.stationName;
     this.gtfsService.fetchSchedule(this.infoLine.idLigne,this.infoLine.idArret,this.infoLine.sensAller).then((stopTimes:SpotTime[]) =>{
      let orderStopTime = _.orderBy(stopTimes,['departure_time'], ['asc']); 
-      console.log(orderStopTime);
+     orderStopTime.forEach((stopTime:SpotTime) => {
+       let hour = stopTime.departure_time.format("kk");
+       if(hour == "24"){
+         hour = "00";
+       }
+       const minute = stopTime.departure_time.format("mm");
+       let foundHour = _.find(this.schedules,{hour:hour});
+       if(!foundHour){
+        this.schedules.push({hour:hour, minutes:[minute]})
+       }else{
+        foundHour.minutes.push(minute);
+       }
+     });
+     this.loading = false;
     });
   }
 

@@ -32,22 +32,25 @@
             <my-header-loader *ngIf="loading && station"></my-header-loader>
           </ion-list-header>
           <div *ngIf="!loading && station && listeTemps.length == 0"class="warning-container">{{ 'WARNING.NO_PLANNED_PASSAGE' | translate }}</div>
-
-          <div class="tempsAttenteContainer" *ngFor="let tempsAttente of listeTemps">
-            <ion-item no-padding lines="none" (click)="goSchedule(tempsAttente)">
-                <ion-thumbnail slot="start" class="numLigne"  style.color="#{{tempsAttente.couleurTexte}}" style.background-color="#{{tempsAttente.couleurFond}}">
-                    {{tempsAttente.numLignePublic}}
-                </ion-thumbnail>
-                <ion-label text-wrap>
-                    <h3>{{tempsAttente.destination}}</h3>
-                    <p>{{tempsAttente.precisionDestination}}</p>
-                </ion-label>
-                <ion-icon [color]="tempsAttente.isInfavoris ? 'tertiary' : 'dark'" [name]="tempsAttente.isInfavoris ? 'ios-star' : 'ios-star-outline'" (click)="eventFavoris(tempsAttente)"></ion-icon>
-            </ion-item>
-            <div class="timeContainer">
-                <div class="time" *ngFor="let time of tempsAttente.lstTemps">{{time}}</div>
+          <div text-center *ngFor="let tempsAttente of listeTemps">
+            <div class="tempsAttenteContainer">
+                <ion-item no-padding lines="none">
+                    <ion-thumbnail slot="start" class="numLigne"  style.color="#{{tempsAttente.couleurTexte}}" style.background-color="#{{tempsAttente.couleurFond}}">
+                        {{tempsAttente.numLignePublic}}
+                    </ion-thumbnail>
+                    <ion-label text-wrap>
+                        <h3>{{tempsAttente.destination}}</h3>
+                        <p>{{tempsAttente.precisionDestination}}</p>
+                    </ion-label>
+                    <ion-icon [color]="tempsAttente.isInfavoris ? 'tertiary' : 'dark'" [name]="tempsAttente.isInfavoris ? 'ios-star' : 'ios-star-outline'" (click)="eventFavoris(tempsAttente)"></ion-icon>
+                </ion-item>
+                <div class="timeContainer">
+                    <div class="time" *ngFor="let time of tempsAttente.lstTemps">{{time}}</div>
+                </div>
             </div>
-          </div>
+            <ion-button size="small" fill="outline" (click)="goSchedule(tempsAttente)">Fiche Horaires</ion-button>
+        </div>
+
     </ion-list>
 
 </ion-content>

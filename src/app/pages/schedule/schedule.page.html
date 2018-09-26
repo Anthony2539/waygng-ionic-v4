@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+          <ion-button (click)="goBack()">
+              <ion-icon name="arrow-back"></ion-icon>
+          </ion-button>
+      </ion-buttons>
+    <ion-title>{{ 'TITLE.SCHEDULE' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="infoLineContainer">
+    <ion-item no-padding lines="none">
+        <ion-thumbnail slot="start" class="numLigne"  style.color="#{{infoLine.couleurTexte}}" style.background-color="#{{infoLine.couleurFond}}">
+            {{infoLine.numLignePublic}}
+        </ion-thumbnail>
+        <ion-label text-wrap>
+            <h3 class="displayCenter"><ion-icon  slot="start" name="ios-arrow-round-forward"></ion-icon> {{infoLine.destination}}</h3>
+            <p class="displayCenter"><ion-icon  slot="start" name="pin"></ion-icon> {{stationName}}</p>
+        </ion-label>
+        <ion-label  text-wrap>
+         <h3 style="float:right">{{today}}</h3> 
+      </ion-label>
+    </ion-item>
+  </div>
+  <my-loader *ngIf="loading"></my-loader>
+
+  <ion-grid *ngIf="!loading">
+    <ion-row align-items-start *ngFor="let schedule of schedules">
+      <ion-col size="auto" align-self-start>
+        <b>{{schedule.hour}}</b>
+      </ion-col>
+      <ion-col size="auto" align-self-start *ngFor="let minute of schedule.minutes">
+          {{minute}}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
