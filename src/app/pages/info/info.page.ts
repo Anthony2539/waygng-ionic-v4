@@ -51,6 +51,7 @@ export class InfoPage implements OnInit {
       if(refresher){
         refresher.target.complete();
       }
+      this.loading = false;
       this.myToast.createToast("ERROR_IMPOSSIBLE_REFRESH", 'top');
     });
   }
