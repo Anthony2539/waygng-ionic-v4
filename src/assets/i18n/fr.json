@@ -30,7 +30,8 @@
         "LAST_UPDATE": "Dernière mise à jour",
         "NO_STATION_NEARBY": "Aucune station à proximité",
         "ACTIVE_YOUR_LOCALISATION": "Veuillez activer votre localisation",
-        "NO_TRAFFIC_INFO": "Aucune info trafic pour le moment"
+        "NO_TRAFFIC_INFO": "Aucune info trafic pour le moment",
+        "EMPTY_SCHEDULE" : "Aucune fiche horaires disponible"
     },
     "REFRESHING": "Chargement...",
     "NEAREST_STATION": "Stations les plus proches",

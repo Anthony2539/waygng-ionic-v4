@@ -12,7 +12,8 @@
         "MAP":"Nearby",
         "LOGIN": "Welcome",
         "PRICE": "Price",
-        "SCHEDULE": "Schedules"
+        "SCHEDULE": "Schedules",
+        "EMPTY_SCHEDULE" : "No schedules available"
     },
 
     "MENU":{

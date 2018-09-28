@@ -29,17 +29,21 @@ export class SchedulePage implements OnInit {
               private gtfsService:GtfsService) { }
 
   ngOnInit() {
-    this.loading = true;
-    this.today = moment().format("dddd");
-    this.infoLine = this.route.snapshot.queryParams;
+    this.route.queryParamMap.subscribe(params => {
+      this.loading = true;
+      this.today = moment().format("dddd");
+      this.infoLine = params["params"];
+      this.goSchedule();
+    });
+    
+  }
+
+  goSchedule(){
     this.stationName = this.infoLine.stationName;
     this.gtfsService.fetchSchedule(this.infoLine.idLigne,this.infoLine.idArret,this.infoLine.sensAller).then((stopTimes:SpotTime[]) =>{
      let orderStopTime = _.orderBy(stopTimes,['departure_time'], ['asc']); 
      orderStopTime.forEach((stopTime:SpotTime) => {
-       let hour = stopTime.departure_time.format("kk");
-       if(hour == "24"){
-         hour = "00";
-       }
+       let hour = stopTime.departure_time.format("HH");
        const minute = stopTime.departure_time.format("mm");
        let foundHour = _.find(this.schedules,{hour:hour});
        if(!foundHour){

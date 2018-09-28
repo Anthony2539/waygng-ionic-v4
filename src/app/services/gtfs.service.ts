@@ -64,11 +64,13 @@ export class GtfsService {
           return _.filter(jsonData, {"route_id":filterValue,"direction_id":optionValue});
         }else if (typeFile == TYPE_FILE.STOP_TIMES){
           let filter = _.filter(jsonData, {"stop_id":filterValue});
-          return filter.map((spotTime:SpotTime)  => {
+          return filter.map((spotTime:any)  => {
+            spotTime.arrival_time = this.transformTime(spotTime.arrival_time);
+            spotTime.departure_time = this.transformTime(spotTime.departure_time);
              const s: SpotTime = {
               trip_id:spotTime.trip_id,
-              arrival_time:moment(spotTime.arrival_time, "kk:mm:ss"),
-              departure_time:moment(spotTime.departure_time, "kk:mm:ss"),
+              arrival_time:moment(spotTime.arrival_time, "HH:mm:ss"),
+              departure_time:moment(spotTime.departure_time, "HH:mm:ss"),
               stop_id:spotTime.stop_id,
               stop_sequence:spotTime.stop_sequence,
               stop_headsign:spotTime.stop_headsign,
@@ -97,6 +99,19 @@ export class GtfsService {
     parsedData.splice(0, 1);
     csvData = parsedData;
     return csvData;
+  }
+
+  private transformTime(time:string):string{
+    if(time){
+      let hour = _.split(time, ':', 1)[0];
+      let h = Number(hour);
+      let res:number;
+      if(h >= 24){
+        res = h - 24;
+        time = _.replace(time, hour, String("0"+res));
+      }
+    }
+    return time;
   }
 
   private handleError<T> (operation = 'operation', result?: T) {

@@ -24,12 +24,14 @@
       </ion-label>
     </ion-item>
   </div>
+  <div *ngIf="schedules?.length==0 && schedules?.length == 0 && !loading" class="warning-container">{{ 'WARNING.EMPTY_SCHEDULE' | translate }}</div>
+
   <my-loader *ngIf="loading"></my-loader>
 
   <ion-grid *ngIf="!loading">
     <ion-row align-items-start *ngFor="let schedule of schedules">
       <ion-col size="auto" align-self-start>
-        <b>{{schedule.hour}}</b>
+        <b>{{schedule.hour}}h</b>
       </ion-col>
       <ion-col size="auto" align-self-start *ngFor="let minute of schedule.minutes">
           {{minute}}
