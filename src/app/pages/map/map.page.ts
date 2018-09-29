@@ -70,7 +70,7 @@ initMap(id?:string){
   if(id){
     this.ginkoService.fetchStation(id).subscribe((station:Station) => {
       this.ginkoService.fetchStationsProche(station.latitude,station.longitude).subscribe((stations:Station[]) => {
-        this.loadMap(station.latitude,station.longitude,stations, id);
+        this.loadMap(station.latitude,station.longitude,stations);
       },
       (err) => {
         this.handleError();
@@ -96,7 +96,7 @@ initMap(id?:string){
 
 }
 
-loadMap(latitude:number,longitude:number,stations:Station[], id?:string) {
+loadMap(latitude:number,longitude:number,stations:Station[]) {
   const mapOptions: GoogleMapOptions = {
     camera: {
       target: {
