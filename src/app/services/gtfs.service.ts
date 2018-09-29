@@ -24,12 +24,11 @@ export class GtfsService {
 
   constructor(private http: Http) { }
 
-  public async fetchSchedule(idLigne:string, idArret:string, direction:string):Promise<SpotTime[]>{
+  public async fetchSchedule(idLigne:string, idArret:string, direction:string, dateSelected:string):Promise<SpotTime[]>{
       let schedules:SpotTime[] = [];
       const tripsObservalble = this.readCsvData(TYPE_FILE.TRIPS,idLigne,direction);
       const stopTimesObservalble = this.readCsvData(TYPE_FILE.STOP_TIMES,idArret); 
-      const today = moment().format("YYYYMMDD");
-      const calendarDatesObservalble = this.readCsvData(TYPE_FILE.CALENDAR_DATES,today);
+      const calendarDatesObservalble = this.readCsvData(TYPE_FILE.CALENDAR_DATES,dateSelected);
       let tripsResult:Trip[] = [];
       let calendarDates:CalendarDate[] = await calendarDatesObservalble.toPromise();
       if(calendarDates && calendarDates.length > 0){

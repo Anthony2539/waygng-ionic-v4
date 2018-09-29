@@ -19,24 +19,24 @@
             <h3 class="displayCenter"><ion-icon  slot="start" name="ios-arrow-round-forward"></ion-icon> {{infoLine.destination}}</h3>
             <p class="displayCenter"><ion-icon  slot="start" name="pin"></ion-icon> {{stationName}}</p>
         </ion-label>
-        <ion-label  text-wrap>
-         <h3 style="float:right">{{today}}</h3> 
-      </ion-label>
     </ion-item>
   </div>
-  <div *ngIf="schedules?.length==0 && schedules?.length == 0 && !loading" class="warning-container">{{ 'WARNING.EMPTY_SCHEDULE' | translate }}</div>
-
   <my-loader *ngIf="loading"></my-loader>
-
-  <ion-grid *ngIf="!loading">
-    <ion-row align-items-start *ngFor="let schedule of schedules">
-      <ion-col size="auto" align-self-start>
-        <b>{{schedule.hour}}h</b>
-      </ion-col>
-      <ion-col size="auto" align-self-start *ngFor="let minute of schedule.minutes">
-          {{minute}}
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-
+  <div *ngIf="!loading">
+    <ion-item>
+      <ion-label position="stacked">Fiche Horaire du</ion-label>
+      <ion-datetime [(ngModel)]="dateSelected" display-format="DDDD DD/MM/YYYY" picker-format="DD MMMM YYYY" day-names="Dimanche,Lundi,Mardi,Mercredi,Jeudi,Vendredi,Samedi" month-names="Janvier,Février,Mars,Avril,Mai,Juin,Juillet,Août,Septembre,Octobre,Novembre,Décembre" (ionChange)="onChangeDate()"></ion-datetime>
+    </ion-item>
+    <div *ngIf="schedules?.length==0 && schedules?.length == 0 && !loading" class="warning-container">{{ 'WARNING.EMPTY_SCHEDULE' | translate }}</div>
+    <ion-grid>
+      <ion-row align-items-start *ngFor="let schedule of schedules">
+        <ion-col size="auto" align-self-start>
+          <b>{{schedule.hour}}h</b>
+        </ion-col>
+        <ion-col size="auto" align-self-start *ngFor="let minute of schedule.minutes">
+            {{minute}}
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 </ion-content>
