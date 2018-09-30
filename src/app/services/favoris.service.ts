@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
-import { AuthService } from './auth.service';
 import { Station } from '../models/station';
 import { TempsAttenteFav } from '../models/temps-attente-fav';
 import { take } from 'rxjs/operators';
@@ -14,7 +13,7 @@ export class FavorisService {
 
   private user:firebase.User
 
-  constructor(private afs: AngularFirestore, private auth:AuthService, private ga: GoogleAnalytics) { 
+  constructor(private afs: AngularFirestore, private ga: GoogleAnalytics) { 
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.user = user;
