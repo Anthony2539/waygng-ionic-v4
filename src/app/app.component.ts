@@ -7,6 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
 import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 import { AppVersion } from '@ionic-native/app-version/ngx';
+import { AppRate } from '@ionic-native/app-rate/ngx';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +21,8 @@ export class AppComponent {
     private statusBar: StatusBar,
     private globalization: Globalization,
     private translate: TranslateService,
-    private ga: GoogleAnalytics
+    private ga: GoogleAnalytics,
+    private appRate: AppRate
   ) {
     this.initializeApp(); 
   } 
@@ -53,6 +55,17 @@ export class AppComponent {
           this.initTranslate(lang[0]);
         })
       .catch(e => this.initTranslate());
+
+
+      this.appRate.preferences = {
+        usesUntilPrompt: 3,
+        storeAppURL: {
+         ios: '1042090856'
+         //android: 'market://details?id=<package_name>'
+        }
+      }
+      
+      this.appRate.promptForRating(false);
 
     });
   }
