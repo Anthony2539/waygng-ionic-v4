@@ -56,15 +56,29 @@ export class AppComponent {
         })
       .catch(e => this.initTranslate());
 
-
       this.appRate.preferences = {
-        usesUntilPrompt: 3,
+        simpleMode: true,
+        displayAppName: 'Waygng',
+        promptAgainForEachNewVersion: true,
+        usesUntilPrompt: 2,
         storeAppURL: {
-         ios: '1042090856'
-         //android: 'market://details?id=<package_name>'
+          ios: '1042090856',
+          android: 'market://details?id=com.waygetandgo'
+        },
+        customLocale: {
+          title: "Voulez-vous noter %@?",
+          message: "Cela ne prendra pas plus d’une minute et nous aidera à promouvoir notre application. Merci pour votre aide!",
+          cancelButtonLabel: "Non, merci",
+          laterButtonLabel: "Me le rappeler plus-tard",
+          rateButtonLabel: "Noter maintenant",
+          yesButtonLabel: "Yes!",
+          noButtonLabel: "Not really",
+          appRatePromptTitle: 'Do you like using %@',
+          feedbackPromptTitle: 'Mind giving us some feedback?'
         }
-      }
-      
+      };
+ 
+      // Opens the rating immediately no matter what preferences you set
       this.appRate.promptForRating(false);
 
     });
