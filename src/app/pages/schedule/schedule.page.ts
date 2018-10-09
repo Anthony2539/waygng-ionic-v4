@@ -56,19 +56,20 @@ export class SchedulePage implements OnInit {
     this.loading = true;
     this.stationName = this.infoLine.stationName;
     this.schedules = [];
-    this.gtfsService.fetchSchedule(this.infoLine.idLigne,this.infoLine.idArret,this.infoLine.sensAller,dateSelected).then((stopTimes:SpotTime[]) =>{
-     let orderStopTime = _.orderBy(stopTimes,['departure_time'], ['asc']); 
-     orderStopTime.forEach((stopTime:SpotTime) => {
-       let hour = stopTime.departure_time.format("HH");
-       const minute = stopTime.departure_time.format("mm");
-       let foundHour = _.find(this.schedules,{hour:hour});
-       if(!foundHour){
-        this.schedules.push({hour:hour, minutes:[minute]})
-       }else{
-        foundHour.minutes.push(minute);
-       }
-     });
-     this.loading = false;
+    this.gtfsService.fetchSchedule(this.infoLine.idLigne,this.infoLine.idArret,this.infoLine.sensAller,dateSelected).subscribe( (stopTimes:SpotTime[]) => {
+      stopTimes.forEach((stopTime:SpotTime) => {
+        const time = moment(stopTime.departure_time, "HH:mm:ss");
+        let hour = time.format("HH");
+        const minute = time.format("mm");
+        let foundHour = _.find(this.schedules,{hour:hour});
+        if(!foundHour){
+         this.schedules.push({hour:hour, minutes:[minute]})
+        }else{
+         foundHour.minutes.push(minute);
+        }
+      });
+      this.schedules = _.orderBy(this.schedules ,['hour'], ['asc']); 
+      this.loading = false;
     });
   }
 

@@ -63,6 +63,7 @@
     "moment": "^2.22.2",
     "papaparse": "^4.6.0",
     "rxjs": "6.2.2",
+    "web": "0.0.2",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
