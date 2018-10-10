@@ -46,6 +46,7 @@
     "STATIONS": "Stations",
     "STATION": "Station",
     "ERROR_IMPOSSIBLE_REFRESH": "Can not refresh. Please try again.",
+    "ERROR_IMPOSSIBLE_LOAD_SCHEDULE": "Can not load schedule. Please try again.",
     "ERROR_IMPOSSIBLE_POSITION": "Can not load your position. Please enable localization.",
     "REMOVED_FAVORITES": "removed from favorites !",
     "ADDED_FAVORITES": "added from favorites !",

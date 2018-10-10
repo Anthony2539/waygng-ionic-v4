@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import * as _ from 'lodash';
 import * as moment from 'moment';
 import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
+import { MyToastComponent } from '../../components/my-toast/my-toast.component';
 
 interface Schedule{
   hour:string;
@@ -28,6 +29,7 @@ export class SchedulePage implements OnInit {
 
   constructor(private route: ActivatedRoute, 
               private ga: GoogleAnalytics,
+              public myToast: MyToastComponent,
               private location: Location,
               private gtfsService:GtfsService) { }
 
@@ -69,6 +71,10 @@ export class SchedulePage implements OnInit {
         }
       });
       this.schedules = _.orderBy(this.schedules ,['hour'], ['asc']); 
+      this.loading = false;
+    },
+    (err) => {
+      this.myToast.createToast("ERROR_IMPOSSIBLE_LOAD_SCHEDULE", 'top');
       this.loading = false;
     });
   }

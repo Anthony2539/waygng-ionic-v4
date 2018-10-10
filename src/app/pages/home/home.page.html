@@ -20,7 +20,7 @@
       <ion-text margin-end text-lowercase text-wrap style="font-size: 10px">{{dateLastUpdate | formatDate:'calendar'}}</ion-text>
       <my-header-loader *ngIf="loadFavoris"></my-header-loader>
     </ion-list-header>
-    <div *ngIf="favoris?.length==0 && tempsAttenteFavs?.length == 0 && !loadFavoris" class="warning-container">{{ 'WARNING.EMPTY_FAV' | translate }}</div>
+    <div *ngIf="favorisTemps?.length==0 && !loadFavoris" class="warning-container">{{ 'WARNING.EMPTY_FAV' | translate }}</div>
     <ion-reorder-group id="reorder" (ionItemReorder)="reorderItems($event)">
         <ion-item-sliding *ngFor="let favorisTemps of favorisTemps">
                 <div *ngIf="!favorisTemps.favoris.isStation">

@@ -40,6 +40,7 @@
     "STATIONS": "Stations",
     "STATION": "Station",
     "ERROR_IMPOSSIBLE_REFRESH": "Impossible d'actualiser. Merci de réessayer.",
+    "ERROR_IMPOSSIBLE_LOAD_SCHEDULE": "Impossible de charger la fiche horaire. Merci de réessayer.",
     "ERROR_IMPOSSIBLE_POSITION": "Impossible de charger votre position. Merci d'activer votre localisation.",
     "REMOVED_FAVORITES": "supprimé des favoris !",
     "ADDED_FAVORITES": "ajouté aux favoris !",
