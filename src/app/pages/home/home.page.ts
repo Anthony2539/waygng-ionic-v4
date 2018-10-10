@@ -87,33 +87,35 @@ export class HomePage {
   getFavoris(refresher?){
     this.userService.getUser().subscribe((user:User) => {
        this.favorisTemps = [];
-       let favoris = user.favs;
-       let searchListeTemps:SearchListeTemps = {listeNoms:[], listeIdLignes:[], listeSensAller:[], preserverOrdre:true,nb:1};
-       favoris.forEach(fav => {
-        this.favorisTemps.push({favoris:fav});
-         if(!fav.isStation){
-           searchListeTemps.listeNoms.push(fav.station.name);
-           searchListeTemps.listeIdLignes.push(fav.idLigne);
-           searchListeTemps.listeSensAller.push(fav.sensAller);
-         }
-       });
- 
-       this.ginkoService.fetchListeTemps(searchListeTemps).subscribe((stationAttentes:StationAttente[]) => {
-        this.favorisTemps.forEach((favorisTemps:FavorisTemps) => {
-           if(!favorisTemps.favoris.isStation){
-             stationAttentes.forEach((stationAttente:StationAttente) => {
-               if(stationAttente.nomExact == favorisTemps.favoris.station.name && stationAttente.listeTemps && stationAttente.listeTemps.length > 0){
-                 stationAttente.listeTemps.forEach((tempsAttente:TempsAttente) =>{
-                   if(favorisTemps.favoris.idArret == tempsAttente.idArret && favorisTemps.favoris.idLigne == tempsAttente.idLigne && favorisTemps.favoris.sensAller == tempsAttente.sensAller){
-                    favorisTemps.temps = tempsAttente.temps;
-                   }
-                 });
-               }
-             });
-           }
-         });
-       });
-       this.favoris = favoris;
+       if(user && user.favs && user.favs.length > 0){
+        let favoris = user.favs;
+        let searchListeTemps:SearchListeTemps = {listeNoms:[], listeIdLignes:[], listeSensAller:[], preserverOrdre:true,nb:1};
+        favoris.forEach(fav => {
+          this.favorisTemps.push({favoris:fav});
+          if(!fav.isStation){
+            searchListeTemps.listeNoms.push(fav.station.name);
+            searchListeTemps.listeIdLignes.push(fav.idLigne);
+            searchListeTemps.listeSensAller.push(fav.sensAller);
+          }
+        });
+  
+        this.ginkoService.fetchListeTemps(searchListeTemps).subscribe((stationAttentes:StationAttente[]) => {
+          this.favorisTemps.forEach((favorisTemps:FavorisTemps) => {
+            if(!favorisTemps.favoris.isStation){
+              stationAttentes.forEach((stationAttente:StationAttente) => {
+                if(stationAttente.nomExact == favorisTemps.favoris.station.name && stationAttente.listeTemps && stationAttente.listeTemps.length > 0){
+                  stationAttente.listeTemps.forEach((tempsAttente:TempsAttente) =>{
+                    if(favorisTemps.favoris.idArret == tempsAttente.idArret && favorisTemps.favoris.idLigne == tempsAttente.idLigne && favorisTemps.favoris.sensAller == tempsAttente.sensAller){
+                      favorisTemps.temps = tempsAttente.temps;
+                    }
+                  });
+                }
+              });
+            }
+          });
+        });
+        this.favoris = favoris;
+      }
        this.loadFavoris = false;
        this.dateLastUpdate = new Date().getTime();
        if(refresher){
