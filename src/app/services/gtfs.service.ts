@@ -14,7 +14,9 @@ export class GtfsService {
 
   fetchSchedule(idLigne:string, idArret:string, direction:string, dateSelected:string):Observable<SpotTime[]> {
 
-    let url = `https://us-central1-waygng-dev-2e25c.cloudfunctions.net/app/gtfs`
+    //const url = `https://us-central1-waygng-dev-2e25c.cloudfunctions.net/app/gtfs`
+    const url = `https://us-central1-waygng-prod.cloudfunctions.net/app/gtfs`
+
 
     const params = new HttpParams({
       fromObject: {
