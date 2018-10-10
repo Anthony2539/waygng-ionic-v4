@@ -1,6 +1,11 @@
 <ion-header>
   <ion-toolbar color="primary">
       <ion-searchbar color="primary" placeholder="{{ 'STATION' | translate }}" routerLink="/tabs/search"></ion-searchbar>
+      <ion-buttons slot="primary">
+        <ion-button (click)="toggleEdit()">
+            <ion-icon class="icon-rotate" slot="icon-only" name="swap"></ion-icon>
+        </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -16,36 +21,41 @@
       <my-header-loader *ngIf="loadFavoris"></my-header-loader>
     </ion-list-header>
     <div *ngIf="favoris?.length==0 && tempsAttenteFavs?.length == 0 && !loadFavoris" class="warning-container">{{ 'WARNING.EMPTY_FAV' | translate }}</div>
+    <ion-reorder-group id="reorder" (ionItemReorder)="reorderItems($event)">
+        <ion-item-sliding *ngFor="let favorisTemps of favorisTemps">
+                <div *ngIf="!favorisTemps.favoris.isStation">
+                    <ion-item button (click)="itemSelected(favorisTemps.favoris.station)">
+                        <ion-thumbnail slot="start" class="numLigne" style.color="#{{favorisTemps.favoris.couleurTexte}}" style.background-color="#{{favorisTemps.favoris.couleurFond}}">
+                            {{favorisTemps.favoris.numLignePublic}}
+                        </ion-thumbnail>
+                        <ion-label text-wrap>
+                            <h3>{{favorisTemps.favoris.station.name}}</h3>
+                            <p>{{favorisTemps.favoris.destination}}</p>
+                        </ion-label>
+                        <ion-text slot="end">{{favorisTemps.temps}}</ion-text>
+                        <ion-reorder slot="end"></ion-reorder>
+                    </ion-item>   
+                    <ion-item-options side="end">
+                        <ion-item-option color="danger" (click)="removeTempsAttenteFavoris(favorisTemps.favoris)">
+                            <ion-icon slot="icon-only" name="trash"></ion-icon>
+                        </ion-item-option>
+                    </ion-item-options>
+                </div>
+                <div *ngIf="favorisTemps.favoris.isStation">
+                    <ion-item button (click)="itemSelected(favorisTemps.favoris.station)">
+                        <ion-icon name="pin" size="small"></ion-icon>
+                        <ion-text padding-start>{{favorisTemps.favoris.station.name}} </ion-text>
+                        <ion-reorder slot="end"></ion-reorder>
+                    </ion-item>    
+                    <ion-item-options side="end">
+                        <ion-item-option color="danger" (click)="removeFavoris(favorisTemps.favoris)">
+                            <ion-icon slot="icon-only" name="trash"></ion-icon>
+                        </ion-item-option>
+                    </ion-item-options>
+                </div>
 
-    <ion-item-sliding *ngFor="let tempsAttenteFav of tempsAttenteFavs">
-        <ion-item button (click)="itemSelected(tempsAttenteFav.station)">
-            <ion-thumbnail slot="start" class="numLigne" style.color="#{{tempsAttenteFav.couleurTexte}}" style.background-color="#{{tempsAttenteFav.couleurFond}}">
-                {{tempsAttenteFav.numLignePublic}}
-            </ion-thumbnail>
-            <ion-label text-wrap>
-                <h3>{{tempsAttenteFav.station.name}}</h3>
-                <p>{{tempsAttenteFav.destination}}</p>
-            </ion-label>
-            <ion-text slot="end">{{tempsAttenteFav.temps}}</ion-text>
-        </ion-item>   
-        <ion-item-options side="end">
-            <ion-item-option color="danger" (click)="removeTempsAttenteFavoris(tempsAttenteFav)">
-                <ion-icon slot="icon-only" name="trash"></ion-icon>
-            </ion-item-option>
-        </ion-item-options>
-    </ion-item-sliding>
-
-    <ion-item-sliding *ngFor="let fav of favoris">
-        <ion-item button (click)="itemSelected(fav)">
-          <ion-icon name="pin" size="small"></ion-icon>
-          <ion-text padding-start>{{fav.name}} </ion-text>
-        </ion-item>    
-        <ion-item-options side="end">
-            <ion-item-option color="danger" (click)="removeFavoris(fav)">
-                <ion-icon slot="icon-only" name="trash"></ion-icon>
-            </ion-item-option>
-        </ion-item-options>
-    </ion-item-sliding>
+        </ion-item-sliding>
+    </ion-reorder-group>
   </ion-list>
 
 

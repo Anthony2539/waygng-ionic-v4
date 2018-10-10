@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as papa from 'papaparse';
-import { Http } from '@angular/http';
+import { Http, RequestOptionsArgs, Headers } from '@angular/http';
 import { ParseConfig } from 'papaparse';
 import * as _ from 'lodash';
 import {catchError, map} from 'rxjs/operators';
@@ -22,7 +22,33 @@ enum TYPE_FILE {
 })
 export class GtfsService {
 
-  constructor(private http: Http) { }
+  constructor(private http: Http) {
+    
+
+    //route_id=102&direction_id=0&stop_id=t_allen1&date=20181008
+    let url = `https://us-central1-waygng-dev-2e25c.cloudfunctions.net/app/gtfs`
+    let params: URLSearchParams = new URLSearchParams();
+    let headers = new Headers({'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
+
+    params.set('route_id', '102');
+    params.set('direction_id', '0');
+    params.set('stop_id', 't_allen1');
+    params.set('date', '20181008');
+
+    let options:RequestOptionsArgs = {}
+    options.params = params;
+    options.headers = headers;
+
+    this.http.get(url, options)
+                    .toPromise()
+                    .then( res => {
+                      console.log(res)
+                    })
+                    .catch(err => {
+                      console.log(err)
+                    })
+
+   }
 
   public async fetchSchedule(idLigne:string, idArret:string, direction:string, dateSelected:string):Promise<SpotTime[]>{
       let schedules:SpotTime[] = [];

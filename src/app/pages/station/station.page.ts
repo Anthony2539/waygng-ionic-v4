@@ -4,11 +4,13 @@ import { Station } from '../../models/station';
 import { GinkoService } from '../../services/ginko.service';
 import { TempsAttente } from '../../models/temps-attente';
 import { MyToastComponent } from '../../components/my-toast/my-toast.component';
-import { TempsAttenteFav } from '../../models/temps-attente-fav';
-import { FavorisService } from '../../services/favoris.service';
 import { take } from 'rxjs/operators';
 import { Location } from '@angular/common';
 import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
+import { Favoris } from '../../models/favoris';
+import { UserService } from '../../services/user.service';
+import { User } from '../../models/user';
+import * as _ from 'lodash';
 
 @Component({ 
   selector: 'app-station',
@@ -29,7 +31,7 @@ export class StationPage implements OnInit {
               private router: Router,
               private ga: GoogleAnalytics,
               private ginkoService: GinkoService, 
-              private favorisService: FavorisService,
+              private userService: UserService,
               private location: Location,
               public myToast: MyToastComponent) { }
 
@@ -101,68 +103,68 @@ export class StationPage implements OnInit {
  
 
 checkIfInFavoris(){
-  this.favorisService.getFavoris(this.station.name).valueChanges().pipe(take(1)).subscribe(stations => {
-    if(stations && stations.length > 0){
-      this.isInfavoris = true;
-    }else{
-      this.isInfavoris = false;
+  this.userService.getUser().pipe(take(1)).subscribe((user:User) => {
+    if(user.favs && user.favs.length > 0){
+      const found = _.find(user.favs, {station:this.station});
+      if(found){
+        this.isInfavoris = true;
+      }else{
+        this.isInfavoris = false;
+      }
     }
   });
 }
 
 checkIfTempsAttenteInFavoris(){
-  this.favorisService.getFavorisTempsAttenteList(this.station.id).valueChanges().subscribe((tempsAttenteFav:TempsAttenteFav[]) => {
-    this.listeTemps.forEach((temps:TempsAttente) =>{
-      tempsAttenteFav.forEach((tempsFav:TempsAttenteFav) => {
-        if(temps.idArret == tempsFav.idArret && temps.sensAller == tempsFav.sensAller && temps.idLigne == tempsFav.idLigne){
-          temps.isInfavoris = true;
-        }
+  this.userService.getUser().pipe(take(1)).subscribe((user:User) => {
+    if(user.favs && user.favs.length > 0){
+      this.listeTemps.forEach((temps:TempsAttente) =>{
+        user.favs.forEach((fav:Favoris) => {
+          if(temps.idArret == fav.idArret && temps.sensAller == fav.sensAller && temps.idLigne == fav.idLigne){
+            temps.isInfavoris = true;
+          }
+        });
       });
-    });
-
+    }
   });
 }
 
 
 eventFavoris(tempsAttente?:TempsAttente){
-  if(tempsAttente){
-    let tempsAttenteFav: TempsAttenteFav = {
-      idArret: tempsAttente.idArret,
-      idLigne: tempsAttente.idLigne,
-      sensAller: tempsAttente.sensAller,
-      destination: tempsAttente.destination,
-      numLignePublic: tempsAttente.numLignePublic,
-      couleurFond: tempsAttente.couleurFond,
-      couleurTexte: tempsAttente.couleurTexte,
-      station:{
-        id:this.station.id,
-        name:this.station.name,
-        latitude:this.station.latitude,
-        longitude:this.station.longitude
-      }
+  let fav: Favoris = {
+    isStation: false,
+    station:this.station
+  }
 
-    }
+  if(tempsAttente){
+    fav.idArret= tempsAttente.idArret;
+    fav.idLigne= tempsAttente.idLigne;
+    fav.sensAller= tempsAttente.sensAller;
+    fav.destination= tempsAttente.destination;
+    fav.numLignePublic= tempsAttente.numLignePublic;
+    fav.couleurFond= tempsAttente.couleurFond;
+    fav.couleurTexte= tempsAttente.couleurTexte;
 
     if(tempsAttente.isInfavoris){
       tempsAttente.isInfavoris = false;
-      this.favorisService.removeFavorisTempsAttente(tempsAttenteFav);
-      this.myToast.createToast('REMOVED_FAVORITES','bottom',tempsAttenteFav.destination);
+      this.userService.removeFavoris(fav);
+      this.myToast.createToast('REMOVED_FAVORITES','bottom',fav.destination);
     }else{
       tempsAttente.isInfavoris = true;
-      this.favorisService.addFavorisTempsAttente(tempsAttenteFav);
-      this.myToast.createToast('ADDED_FAVORITES','bottom',tempsAttenteFav.destination);
+      this.userService.addFavoris(fav);
+      this.myToast.createToast('ADDED_FAVORITES','bottom',fav.destination);
     }
 
   }else{
+    fav.isStation = true;
     if(this.isInfavoris){
       this.isInfavoris = false;
-      this.favorisService.removeFavoris(this.nomExact);
+      this.userService.removeFavoris(fav);
       this.myToast.createToast('REMOVED_FAVORITES','bottom',this.nomExact);
     }else{
       this.isInfavoris = true;
-      this.favorisService.addFavoris(this.station).then(() => {
-        this.myToast.createToast('ADDED_FAVORITES','bottom',this.nomExact);
-      })
+      this.userService.addFavoris(fav);
+      this.myToast.createToast('ADDED_FAVORITES','bottom',this.nomExact);
     }
   }
 }

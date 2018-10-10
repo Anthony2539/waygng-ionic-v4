@@ -14,7 +14,7 @@ export class AuthService {
     firebase.auth().onAuthStateChanged((user) => {
       if(user){
         const item = this.afs.doc('/users/'+user.uid);
-        item.set({"lastConnection":new Date()});
+        item.update({"lastConnection":new Date()});
         this.ga.setUserId(user.uid);
       }
     });
