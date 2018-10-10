@@ -20,7 +20,6 @@ interface Schedule{
 })
 export class SchedulePage implements OnInit {
 
-  maxDate:string;
   dateSelected:string;
   infoLine:any;
   stationName:string;
@@ -36,7 +35,6 @@ export class SchedulePage implements OnInit {
   ngOnInit() {
     this.route.queryParamMap.subscribe(params => {
       this.dateSelected = moment().format("YYYY-MM-DD");
-      this.maxDate = "2018-10-15";
       this.infoLine = params["params"];
       const today = moment().format("YYYYMMDD");
       this.goSchedule(today);
