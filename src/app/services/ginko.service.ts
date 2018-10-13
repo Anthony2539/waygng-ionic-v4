@@ -31,10 +31,9 @@ export class GinkoService {
                 longitude:station.longitude,
                 accessiblite: station.accessiblite
               }
-        return s;
-    });
+            return s;
+            });
         }),
-        catchError(this.handleError('fetchStations', []))
       );
     }
     

@@ -172,6 +172,9 @@ export class HomePage {
    toggleEdit() {
     const reorderGroup:any = document.getElementById('reorder');
     reorderGroup.disabled = !reorderGroup.disabled;
+    if(!reorderGroup.disabled){
+      this.myToast.createToast("REORDER_FAVORITES",'bottom');
+    }
   }
 
   reorderItems(indexes : any){

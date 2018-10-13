@@ -46,5 +46,7 @@
     "ADDED_FAVORITES": "ajouté aux favoris !",
     "CANCEL": "Annuler",
     "TRAFFIC_INFO": "Info trafic",
-    "ACTUALITY": "Actualités"
+    "ACTUALITY": "Actualités",
+    "SCHEDULE_TIME": "Fiche Horaires",
+    "REORDER_FAVORITES": "Réorganise les favoris en les déplaçant !"
 }

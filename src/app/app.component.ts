@@ -27,17 +27,12 @@ export class AppComponent {
     this.initializeApp(); 
   } 
 
+ 
+
   initializeApp() {
     this.platform.ready().then(() => {
 
-      // google analytics
-      this.ga.startTrackerWithId('UA-125580859-1').then(() => {
-        this.appVersion.getVersionCode().then((version:any) => {
-          this.ga.setAppVersion(version);
-        });
-        // Tracker is ready
-        // You can now track pages or set additional information such as AppVersion or UserId
-      }).catch(e => console.log('Error starting GoogleAnalytics', e));
+      this.initGoogleAnalytics();
 
       // this language will be used as a fallback when a translation isn't found in the current language
       this.translate.setDefaultLang('fr');   
@@ -49,40 +44,61 @@ export class AppComponent {
       this.statusBar.styleLightContent();
       this.splashScreen.hide();
  
-      this.globalization.getPreferredLanguage().then(res => 
-        {
-          var lang = res.value.split('-');
-          this.initTranslate(lang[0]);
-        })
-      .catch(e => this.initTranslate());
+      this.initPreferredLanguage();
 
-      this.appRate.preferences = {
-        simpleMode: true,
-        displayAppName: 'Waygng',
-        promptAgainForEachNewVersion: true,
-        usesUntilPrompt: 2,
-        storeAppURL: {
-          ios: '1042090856',
-          android: 'market://details?id=com.waygetandgo'
-        },
-        customLocale: {
-          title: "Voulez-vous noter %@?",
-          message: "Cela ne prendra pas plus d’une minute et nous aidera à promouvoir notre application. Merci pour votre aide!",
-          cancelButtonLabel: "Non, merci",
-          laterButtonLabel: "Me le rappeler plus-tard",
-          rateButtonLabel: "Noter maintenant",
-          yesButtonLabel: "Yes!",
-          noButtonLabel: "Not really",
-          appRatePromptTitle: 'Do you like using %@',
-          feedbackPromptTitle: 'Mind giving us some feedback?'
-        }
-      };
- 
-      // Opens the rating immediately no matter what preferences you set
-      this.appRate.promptForRating(false);
+      this.initAppRate();
 
     });
   }
+
+  initGoogleAnalytics(){
+    // google analytics
+    this.ga.startTrackerWithId('UA-125580859-1').then(() => {
+      if(this.platform.is('android') || this.platform.is('ios')){
+        this.appVersion.getVersionCode().then((version:any) => {
+          this.ga.setAppVersion(version);
+        });
+      }
+      // Tracker is ready
+      // You can now track pages or set additional information such as AppVersion or UserId
+    }).catch(e => console.log('Error starting GoogleAnalytics', e));
+}
+
+initPreferredLanguage(){
+  this.globalization.getPreferredLanguage().then(res => 
+    {
+      var lang = res.value.split('-');
+      this.initTranslate(lang[0]);
+    })
+  .catch(e => this.initTranslate());
+}
+
+initAppRate(){
+  this.appRate.preferences = {
+    simpleMode: true,
+    displayAppName: 'Waygng',
+    promptAgainForEachNewVersion: true,
+    usesUntilPrompt: 2,
+    storeAppURL: {
+      ios: '1042090856',
+      android: 'market://details?id=com.waygetandgo'
+    },
+    customLocale: {
+      title: "Voulez-vous noter %@?",
+      message: "Cela ne prendra pas plus d’une minute et nous aidera à promouvoir notre application. Merci pour votre aide!",
+      cancelButtonLabel: "Non, merci",
+      laterButtonLabel: "Me le rappeler plus-tard",
+      rateButtonLabel: "Noter maintenant",
+      yesButtonLabel: "Yes!",
+      noButtonLabel: "Not really",
+      appRatePromptTitle: 'Do you like using %@',
+      feedbackPromptTitle: 'Mind giving us some feedback?'
+    }
+  };
+
+  // Opens the rating immediately no matter what preferences you set
+  this.appRate.promptForRating(false);
+}
 
   initTranslate(lang?:string) {
     // Set the default language for translation strings, and the current language.

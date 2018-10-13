@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Station } from '../../models/station';
 import { GinkoService } from '../../services/ginko.service';
 import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
+import { MyToastComponent } from '../../components/my-toast/my-toast.component';
 
 @Component({
   selector: 'app-search',
@@ -19,6 +20,7 @@ export class SearchPage implements OnInit {
 
   constructor(private ginkoService: GinkoService,
               private ga: GoogleAnalytics, 
+              public myToast: MyToastComponent,
               private router: Router) { }
 
   ngOnInit() {
@@ -32,6 +34,10 @@ export class SearchPage implements OnInit {
        this.allStations = stations;
        this.stations = stations;
        this.loading = false;
+      },
+      (err) => {
+        this.loading = false;
+        this.myToast.createToast("ERROR_IMPOSSIBLE_REFRESH", 'top');
       });
   }
 

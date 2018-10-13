@@ -52,5 +52,7 @@
     "ADDED_FAVORITES": "added from favorites !",
     "CANCEL": "Cancel",
     "TRAFFIC_INFO": "Traffic info",
-    "ACTUALITY": "Actuality"
+    "ACTUALITY": "Actuality",
+    "SCHEDULE_TIME": "Schedule time",
+    "REORDER_FAVORITES": "Reorder favorites !"
 }

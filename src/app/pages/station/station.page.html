@@ -48,7 +48,7 @@
                     <div class="time" *ngFor="let time of tempsAttente.lstTemps">{{time}}</div>
                 </div>
             </div>
-            <ion-button size="small" fill="outline" (click)="goSchedule(tempsAttente)">Fiche Horaires</ion-button>
+            <ion-button size="small" fill="outline" (click)="goSchedule(tempsAttente)">{{ 'SCHEDULE_TIME' | translate }}</ion-button>
         </div>
 
     </ion-list>
