@@ -39,6 +39,7 @@
     "@types/papaparse": "^4.5.4",
     "angularfire2": "^5.0.0-rc.11",
     "cordova-admob-sdk": "^0.18.0",
+    "cordova-android-play-services-gradle-release": "1.4.4",
     "cordova-browser": "^5.0.4",
     "cordova-ios": "4.5.5",
     "cordova-plugin-admob-free": "^0.18.0",
@@ -112,7 +113,10 @@
       "cordova-plugin-google-analytics": {},
       "cordova-plugin-app-version": {},
       "cordova-plugin-admob-free": {},
-      "cordova-plugin-apprate": {}
+      "cordova-plugin-apprate": {},
+      "cordova-android-play-services-gradle-release": {
+        "PLAY_SERVICES_VERSION": "15.+"
+      }
     },
     "private": true,
     "dependencies": {

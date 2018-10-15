@@ -15,8 +15,8 @@
   </ion-refresher>
 
   <ion-list #slidingList no-margin>
-    <ion-list-header color="light">
-      <ion-icon name="star"></ion-icon><ion-label padding-start>{{ 'FAVORIS' | translate }}</ion-label>
+    <ion-list-header no-margin color="light">
+      <ion-icon name="star"></ion-icon><ion-label text-uppercase padding-start>{{ 'FAVORIS' | translate }}</ion-label>
       <ion-text margin-end text-lowercase text-wrap style="font-size: 10px">{{dateLastUpdate | formatDate:'calendar'}}</ion-text>
       <my-header-loader *ngIf="loadFavoris"></my-header-loader>
     </ion-list-header>
@@ -60,8 +60,8 @@
 
 
   <ion-list no-margin>
-      <ion-list-header color="light">
-        <ion-icon name="pin"></ion-icon><ion-label padding-start>{{ 'NEAREST_STATION' | translate }}</ion-label>
+      <ion-list-header no-margin color="light">
+        <ion-icon name="pin"></ion-icon><ion-label text-uppercase padding-start>{{ 'NEAREST_STATION' | translate }}</ion-label>
         <my-header-loader *ngIf="loadStationProche"></my-header-loader>
       </ion-list-header>
       <div *ngIf="stationProches?.length==0 && !loadStationProche && !isErrorLocation" class="warning-container">{{ 'WARNING.NO_STATION_NEARBY' | translate }}</div>

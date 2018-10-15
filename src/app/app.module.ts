@@ -56,7 +56,7 @@ export function createTranslateLoader(http: HttpClient) {
               }
             }),
             AngularFirestoreModule,
-            AngularFireModule.initializeApp(FIREBASE_CONFIG),
+            AngularFireModule.initializeApp(FIREBASE_CONFIG_PROD),
             AngularFireAuthModule,
             AngularFireDatabaseModule,
             AppRoutingModule

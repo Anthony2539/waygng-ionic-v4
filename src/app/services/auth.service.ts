@@ -11,6 +11,7 @@ import { Platform } from '@ionic/angular';
 interface UserInfo{
   lastConnection:Date,
   currentVersion:string,
+  platforms:string[],
   lastPosition?:any
 }
 
@@ -29,19 +30,20 @@ export class AuthService {
       if(user){
         const item = this.afs.doc('/users/'+user.uid);
         item.valueChanges().pipe(take(1)).subscribe((user:User) => {
-          let userInfo:UserInfo = {"lastConnection":new Date(), "currentVersion":"web"};
+          let userInfo:UserInfo = {lastConnection:new Date(), currentVersion:"web", platforms:this.platform.platforms()};
           if(this.platform.is('android') || this.platform.is('ios')){
-            this.appVersion.getVersionCode().then((version:any) => {
+            this.appVersion.getVersionNumber().then((version:any) => {
               userInfo.currentVersion = version;
+            }); 
+            this.geolocation.getCurrentPosition().then((position:Geoposition) => {
+              userInfo.lastPosition = {latitude:position.coords.latitude, longitude:position.coords.longitude};
+              this.updateOrsetUser(user,userInfo,item);
+            },(err) => {
+              this.updateOrsetUser(user,userInfo,item);
             });
-          }
-          this.geolocation.getCurrentPosition().then((position:Geoposition) => {
-            userInfo.lastPosition = {latitude:position.coords.latitude, longitude:position.coords.longitude};
+          }else{
             this.updateOrsetUser(user,userInfo,item)
-          },(err) => {
-            this.updateOrsetUser(user,userInfo,item);
-          });
-
+          }
         });
         this.ga.setUserId(user.uid);
       }

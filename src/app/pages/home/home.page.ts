@@ -72,10 +72,11 @@ export class HomePage {
         isTesting: false,
         autoShow: true
        }
+       
+      this.adMobFree.interstitial.config(interstitialConfig);
+      this.adMobFree.interstitial.prepare();
     }
 
-    this.adMobFree.interstitial.config(interstitialConfig);
-    this.adMobFree.interstitial.prepare();
   }
 
 

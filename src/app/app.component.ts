@@ -55,7 +55,7 @@ export class AppComponent {
     // google analytics
     this.ga.startTrackerWithId('UA-125580859-1').then(() => {
       if(this.platform.is('android') || this.platform.is('ios')){
-        this.appVersion.getVersionCode().then((version:any) => {
+        this.appVersion.getVersionNumber().then((version:any) => {
           this.ga.setAppVersion(version);
         });
       }
