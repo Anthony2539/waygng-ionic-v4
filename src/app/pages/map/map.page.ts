@@ -152,7 +152,7 @@ loadMap(latitude:number,longitude:number,stations:Station[]) {
     let infoWindow = new HtmlInfoWindow();
           
     var div = document.createElement('div');
-    div.innerHTML=station.name;
+    div.innerHTML='<i class="far fa-clock"></i> '+station.name;
     div.style.cssText = 'text-align:center; width:100px';
     div.id = station.id;
     var self = this;

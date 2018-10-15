@@ -174,7 +174,7 @@ export class HomePage {
     const reorderGroup:any = document.getElementById('reorder');
     reorderGroup.disabled = !reorderGroup.disabled;
     if(!reorderGroup.disabled){
-      this.myToast.createToast("REORDER_FAVORITES",'bottom');
+      this.myToast.createToast("REORDER_FAVORITES",'top');
     }
   }
 
