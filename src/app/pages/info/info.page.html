@@ -10,20 +10,20 @@
 </ion-header>
 
 <ion-content>
-  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
   <ion-toolbar>
-  <ion-segment (ionChange)="segmentChanged($event)">
-    <ion-segment-button value="infosTempsReel" checked>
-      {{ 'TRAFFIC_INFO' | translate }}
-    </ion-segment-button>
-    <ion-segment-button text-wrap value="infosAnticipees">
-      {{ 'ACTUALITY' | translate }}
-    </ion-segment-button>
-  </ion-segment>
+    <ion-segment (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="infosTempsReel" checked>
+        {{ 'TRAFFIC_INFO' | translate }}
+      </ion-segment-button>
+      <ion-segment-button text-wrap value="infosAnticipees">
+        {{ 'ACTUALITY' | translate }}
+      </ion-segment-button>
+    </ion-segment>
 </ion-toolbar>
 <my-loader *ngIf="loading"></my-loader>
+<ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+  <ion-refresher-content refreshingSpinner="circles"></ion-refresher-content>
+</ion-refresher>
   <ion-list *ngIf="isInfosAnticipees">
     <ion-card *ngFor="let info of (infosTrafic | async)?.infosAnticipees">
         <ion-card-header>
