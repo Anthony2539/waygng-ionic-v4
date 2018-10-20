@@ -25,27 +25,32 @@
   <ion-refresher-content refreshingSpinner="circles"></ion-refresher-content>
 </ion-refresher>
   <ion-list *ngIf="isInfosAnticipees">
-    <ion-card *ngFor="let info of (infosTrafic | async)?.infosAnticipees">
-        <ion-card-header>
+    <ion-card *ngFor="let info of infosTrafic?.infosAnticipees">
+        <ion-card-header class="card-header">
             <ion-card-subtitle>
               <ion-thumbnail text-wrap *ngFor="let line of info.lignes" class="numLigne"  style.color="#{{line.couleurTexte}}" style.background-color="#{{line.couleurFond}}">
                 {{line.numLignePublic}}
               </ion-thumbnail>
             </ion-card-subtitle>
             <ion-card-title text-wrap style="font-size: 14px">{{info.titre}}</ion-card-title>
+            <ion-card-title text-wrap style="font-size: 10px">{{info.texte}}</ion-card-title>
         </ion-card-header>
 
-          <ion-card-content>
-              <p [innerHTML]="info.texte"></p>
-              <p [innerHTML]="info.complement"></p>
+          <ion-card-content class="card-content">
+            <ion-grid class="grid-content">
+              <ion-row class="row-content" *ngFor="let complementInfos of info?.complementInfos">
+                <ion-col size="4">{{complementInfos.station}}</ion-col>
+                <ion-col class="col-content" [innerHTML]="complementInfos.info"></ion-col>
+              </ion-row>
+            </ion-grid>
               
-              <p>{{info.url}}</p>
+              <p><a (click)="openLink(info.url)"><ion-icon name="link"></ion-icon>Plus d'info sur Ginko voyage</a></p>
           </ion-card-content>
     </ion-card>
   </ion-list>
   <ion-list *ngIf="!isInfosAnticipees">
-    <div *ngIf="(infosTrafic | async)?.infosTempsReel.length==0 && !loading" class="warning-container">{{ 'WARNING.NO_TRAFFIC_INFO' | translate }}</div>
-    <ion-card *ngFor="let info of (infosTrafic | async)?.infosTempsReel">
+    <div *ngIf="infosTrafic?.infosTempsReel.length==0 && !loading" class="warning-container">{{ 'WARNING.NO_TRAFFIC_INFO' | translate }}</div>
+    <ion-card *ngFor="let info of infosTrafic?.infosTempsReel">
         <ion-card-header>
             <ion-card-subtitle>
               <ion-thumbnail text-wrap *ngFor="let line of info.lignes" class="numLigne"  style.color="#{{line.couleurTexte}}" style.background-color="#{{line.couleurFond}}">
@@ -57,9 +62,8 @@
 
           <ion-card-content>
               <p [innerHTML]="info.texte"></p>
-              <p [innerHTML]="info.complement"></p>
-              
-              <p>{{info.url}}</p>
+               
+              <p><a (click)="openLink(info.url)"><ion-icon name="link"></ion-icon>Plus d'info sur Ginko voyage</a></p>
           </ion-card-content>
     </ion-card>
   </ion-list>

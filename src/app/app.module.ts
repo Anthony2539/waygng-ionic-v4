@@ -15,6 +15,7 @@ import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { AdMobFree } from '@ionic-native/admob-free/ngx';
 import { AppRate } from '@ionic-native/app-rate/ngx';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -71,6 +72,7 @@ export function createTranslateLoader(http: HttpClient) {
     GoogleAnalytics,
     AppVersion,
     AppRate,
+    InAppBrowser,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

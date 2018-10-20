@@ -15,3 +15,17 @@
 .numLigne:not(:first-child) {
     margin-left: 10px;
 }
+
+.card-header{
+    padding:10px;
+}
+
+.card-content{
+    padding: 10px;
+    font-size: 12px;
+}
+
+.grid-content > .row-content:first-child{
+    font-weight: bold;
+}
+

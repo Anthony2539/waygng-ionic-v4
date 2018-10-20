@@ -6,6 +6,13 @@ import { InfosTrafic } from '../../models/infos-trafic';
 import { PopoverController } from '@ionic/angular';
 import { GinkoInfoComponent } from '../../components/ginko-info/ginko-info.component';
 import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { InfoTrafic } from '../../models/info-trafic';
+
+export interface ComplementInfo{
+  station:string,
+  info:string,
+}
 
 @Component({
   selector: 'app-info',
@@ -16,11 +23,12 @@ export class InfoPage implements OnInit {
 
   isInfosAnticipees: boolean = false;
   loading: boolean = false;
-  infosTrafic: Observable<InfosTrafic>;
+  infosTrafic: InfosTrafic;
 
   constructor(private ginkoService:GinkoService,
               private ga: GoogleAnalytics, 
               public myToast: MyToastComponent, 
+              private iab: InAppBrowser,
               public popoverController: PopoverController) { }
 
   ngOnInit() {
@@ -40,8 +48,32 @@ export class InfoPage implements OnInit {
     if(!refresher){
       this.loading = true;
     }
-    this.infosTrafic = this.ginkoService.fetchInfosTrafic();
-    this.infosTrafic.subscribe(() => {
+    this.ginkoService.fetchInfosTrafic().subscribe((infosTrafics:InfosTrafic) => {
+      if(infosTrafics && infosTrafics.infosAnticipees){
+        infosTrafics.infosAnticipees.forEach((infosAnticipees:InfoTrafic) =>{
+          if(infosAnticipees.complement){
+            let complementInfos:ComplementInfo[] = [];
+            let parser = new DOMParser();
+            let parsedHtml = parser.parseFromString(infosAnticipees.complement, 'text/html');
+            let trElements=parsedHtml.getElementsByTagName("tr");
+            if(trElements && trElements.length > 0){
+              for (let i = 0; i < trElements.length; i++) {
+                let thElements = trElements[i].getElementsByTagName("th");
+                if(thElements && thElements.length == 2){
+                  complementInfos.push({station:thElements[0].innerHTML, info:thElements[1].innerHTML});
+                }else{
+                  let tdElements = trElements[i].getElementsByTagName("td");
+                  if(tdElements && tdElements.length == 2){
+                    complementInfos.push({station:tdElements[0].innerHTML, info:tdElements[1].innerHTML});
+                  }
+                }
+              }
+            }
+            infosAnticipees.complementInfos = complementInfos;
+          }
+        });
+      }
+      this.infosTrafic = infosTrafics;
       this.loading = false;
       if(refresher){
         refresher.target.complete();
@@ -75,6 +107,10 @@ export class InfoPage implements OnInit {
       translucent: false
     });
     return await popover.present();
+  }
+
+  openLink(url:string){
+    this.iab.create(url);
   }
   
 

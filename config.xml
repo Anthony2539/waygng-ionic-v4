@@ -106,4 +106,5 @@
     <plugin name="cordova-android-play-services-gradle-release" spec="1.4.4">
         <variable name="PLAY_SERVICES_VERSION" value="15.+" />
     </plugin>
+    <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />
 </widget>
