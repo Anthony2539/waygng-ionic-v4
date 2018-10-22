@@ -7,6 +7,7 @@ import { SearchListeTemps } from '../models/search-liste-temps';
 import { Observable, of } from 'rxjs';
 import { catchError, map} from 'rxjs/operators';
 import { InfosTrafic } from '../models/infos-trafic';
+import { Line } from '../models/line';
  
 @Injectable({
   providedIn: 'root'
@@ -181,6 +182,31 @@ export class GinkoService {
             return data;
         })
     )
+  }
+
+  fetchLines() {
+    let url =  this.urlGinko+"/DR/getLignes.do";
+    return this.http
+        .get<any>(url)
+        .pipe(
+            map(response => {
+              return response.objets.map(line  => {
+                const l: Line = {
+                    id:line.id,
+                    numLignePublic:  line.numLignePublic,
+                    libellePublic: line.libellePublic,
+                    modeTransport: line.modeTransport,
+                    couleurFond:line.couleurFond, 
+                    couleurTexte: line.couleurFond,
+                    variantes:line.variantes,
+                    periurbain:line.periurbain,
+                    scolaire:line.scolaire,
+                  }
+            return l;
+            });
+        }),
+        catchError(this.handleError('fetchLines', []))
+        );
   }
     
 
