@@ -208,6 +208,33 @@ export class GinkoService {
         catchError(this.handleError('fetchLines', []))
         );
   }
+
+  fetchVariantes(idLigne:string, idVariante:string) {
+    const params = new HttpParams({
+        fromObject: {
+            idLigne: idLigne,
+            idVariante: idVariante,
+          }
+    });
+    let url =  this.urlGinko+"/DR/getDetailsVariante.do";
+    return this.http.get<any>(url, {params: params})
+        .pipe(
+            map(response => {
+              return response.objets.map(station  => {
+                const s: Station = {
+                    id:station.id,
+                    name:station.nom,
+                    latitude:station.latitude,
+                    longitude:station.longitude,
+                    latLong:station.latitude+";"+station.longitude,
+                    accessiblite: station.accessiblite
+                  }
+            return s;
+            });
+        }),
+        catchError(this.handleError('fetchLines', []))
+        );
+  }
     
 
   private handleError<T> (operation = 'operation', result?: T) {
