@@ -197,7 +197,7 @@ export class GinkoService {
                     libellePublic: line.libellePublic,
                     modeTransport: line.modeTransport,
                     couleurFond:line.couleurFond, 
-                    couleurTexte: line.couleurFond,
+                    couleurTexte: line.couleurTexte,
                     variantes:line.variantes,
                     periurbain:line.periurbain,
                     scolaire:line.scolaire,

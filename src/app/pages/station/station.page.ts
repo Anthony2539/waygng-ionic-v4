@@ -11,6 +11,9 @@ import { Favoris } from '../../models/favoris';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
 import * as _ from 'lodash';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { Line } from '../../models/line';
+import { Variante } from '../../models/variante';
 
 @Component({ 
   selector: 'app-station',
@@ -19,7 +22,7 @@ import * as _ from 'lodash';
 })
 export class StationPage implements OnInit {
 
-
+  classTimeContainer:string = "timeContainer";
   station:Station;
   loading:boolean = false;
   listeTemps: TempsAttente[] = [];
@@ -33,6 +36,7 @@ export class StationPage implements OnInit {
               private ginkoService: GinkoService, 
               private userService: UserService,
               private location: Location,
+              private nativeStorage: NativeStorage,
               public myToast: MyToastComponent) { }
 
   ngOnInit() {
@@ -56,6 +60,7 @@ export class StationPage implements OnInit {
       this.checkIfInFavoris();
       this.listeTemps = [];
       this.loading = true;
+      this.classTimeContainer = "timeContainer";
       this.ginkoService.fetchTempsLieu(this.station.name).subscribe((stationAttente) => {
         this.nomExact = stationAttente.nomExact;
           let map = new Map;
@@ -79,8 +84,45 @@ export class StationPage implements OnInit {
             }
             currentStation.lstTemps = lstTemps;
             this.listeTemps.push(currentStation);
-
           });
+
+          if(this.listeTemps.length == 0){
+            this.classTimeContainer = "timeContainerEmpty";
+            this.nativeStorage.getItem('mapStationLines').then(
+              data => {
+                if(data){
+                  let stationLines:any = _.find(data,{nameStation:this.station.name});
+                  if(stationLines && stationLines.lines.length > 0){
+                    stationLines.lines.forEach((line:Line) => {
+                      if(line.variantes && line.variantes.length > 0){
+                        line.variantes.forEach((variante:Variante) => {
+                          const tempsAttente:TempsAttente = {
+                            idArret: this.station.id,
+                            idLigne:  line.id,
+                            numLignePublic: line.numLignePublic,
+                            couleurFond: line.couleurFond,
+                            couleurTexte: line.couleurTexte,
+                            sensAller: variante.sensAller,
+                            destination: variante.destination,
+                            precisionDestination: variante.precisionDestination,
+                            temps: "",
+                            fiable: true,
+                            numVehicule: "",
+                            latitude: this.station.latitude,
+                            longitude: this.station.longitude,
+                            lstTemps: ["Aucun bus dans l'heure","Consulter la fiche horaire"],
+                          }
+                          this.listeTemps.push(tempsAttente);
+                        });
+     
+                      }
+                    });
+                  }
+                }
+              }
+            );
+          }
+
         this.dateLastUpdate = new Date().getTime();
 
         this.checkIfTempsAttenteInFavoris();

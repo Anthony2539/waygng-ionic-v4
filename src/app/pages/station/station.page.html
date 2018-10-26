@@ -44,7 +44,7 @@
                     </ion-label>
                     <ion-icon [color]="tempsAttente.isInfavoris ? 'tertiary' : 'dark'" [name]="tempsAttente.isInfavoris ? 'ios-star' : 'ios-star-outline'" (click)="eventFavoris(tempsAttente)"></ion-icon>
                 </ion-item>
-                <div class="timeContainer">
+                <div [class]="classTimeContainer">
                     <div class="time" *ngFor="let time of tempsAttente.lstTemps">{{time}}</div>
                 </div>
             </div>

@@ -33,6 +33,12 @@
     flex-direction: row;
 }
 
+.timeContainerEmpty{
+    display: flex;
+    flex-direction: row;
+    font-size: smaller;
+}
+
 .time{
     width: 100%;
     flex: 0 1 auto;

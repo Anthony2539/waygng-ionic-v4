@@ -4,10 +4,22 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Globalization } from '@ionic-native/globalization/ngx';
 import { TranslateService } from '@ngx-translate/core';
-import * as moment from 'moment';
 import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { AppRate } from '@ionic-native/app-rate/ngx';
+import { Line } from './models/line';
+import { Variante } from './models/variante';
+import { Station } from './models/station';
+import { GinkoService } from './services/ginko.service';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import * as _ from 'lodash';
+import * as moment from 'moment';
+
+interface MapStationLines{
+  nameStation:string;
+  lines:Line[];
+}
+
 
 @Component({
   selector: 'app-root',
@@ -22,7 +34,9 @@ export class AppComponent {
     private globalization: Globalization,
     private translate: TranslateService,
     private ga: GoogleAnalytics,
-    private appRate: AppRate
+    private ginkoService: GinkoService,
+    private appRate: AppRate,
+    private nativeStorage: NativeStorage
   ) {
     this.initializeApp(); 
   } 
@@ -48,7 +62,47 @@ export class AppComponent {
 
       this.initAppRate();
 
+      this.initStationsByLines();
+
     });
+  }
+
+  initStationsByLines(){
+    //this.nativeStorage.clear();
+    this.nativeStorage.getItem('mapStationLines').then(
+      data => {
+        if(data){
+          console.log("stations by lines loaded !");
+        }
+      },
+      async error => {
+        let mapStationLines:MapStationLines[] = [];
+        let lines = await this.ginkoService.fetchLines().toPromise();
+    
+        await Promise.all(lines.map(async (line) => {
+          if(!line.periurbain && line.variantes && line.variantes.length > 0){
+            await Promise.all(line.variantes.map(async (variante) => {
+              let stations = await this.ginkoService.fetchVariantes(line.id, variante.id).toPromise();
+              await Promise.all(stations.map(async (station) => {
+                let stationLines:any = _.find(mapStationLines,{nameStation:station.name});
+                if(stationLines){
+                  let linesTmp:Line[] = stationLines.lines;
+                  const found = _.find(linesTmp, line);
+                  if(!found){
+                    linesTmp.push(line);
+                  }
+                  const index = _.findIndex(mapStationLines,{nameStation:station.name});
+                  mapStationLines[index].lines = linesTmp;
+                }else{
+                  mapStationLines.push({nameStation:station.name,lines:[line]});
+                }
+              }));
+            }));
+          }
+        }));
+        this.nativeStorage.setItem('mapStationLines', mapStationLines);
+      });
+
   }
 
   initGoogleAnalytics(){

@@ -16,6 +16,7 @@ import { AppVersion } from '@ionic-native/app-version/ngx';
 import { AdMobFree } from '@ionic-native/admob-free/ngx';
 import { AppRate } from '@ionic-native/app-rate/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -73,6 +74,7 @@ export function createTranslateLoader(http: HttpClient) {
     AppVersion,
     AppRate,
     InAppBrowser,
+    NativeStorage,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

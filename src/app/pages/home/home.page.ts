@@ -16,8 +16,6 @@ import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
 import { FavorisTemps } from '../../models/favorisTemps';
 import * as _ from 'lodash';
-import { Line } from '../../models/line';
-import { Variante } from '../../models/variante';
 
 @Component({
   selector: 'app-home',
@@ -57,31 +55,6 @@ export class HomePage {
 
   ngOnInit() {
     this.ga.trackView('Home page');
-    let mapStationLines = new Map<string, Line[]>();
-    this.ginkoService.fetchLines().subscribe((lines:Line[]) => {
-      lines.forEach((line:Line) => {
-        if(!line.periurbain && line.variantes && line.variantes.length > 0){
-          line.variantes.forEach((variante:Variante) => {
-            this.ginkoService.fetchVariantes(line.id, variante.id).subscribe((stations:Station[]) => {
-              stations.forEach((station:Station) => {
-                if(mapStationLines.has(station.name)){
-                  let linesTmp:Line[] = mapStationLines.get(station.name);
-                  const found = _.find(linesTmp, line);
-                  if(!found){
-                    linesTmp.push(line);
-                  }
-                  mapStationLines.set(station.name,linesTmp);
-                }else{
-                  let linesTmp:Line[] = [];
-                  mapStationLines.set(station.name,linesTmp);
-                }
-              });
-            }); 
-          });
-        }
-      });
-    });
-    console.log(mapStationLines);
     this.platform.ready().then(() => { 
       this.showInterstitialAd();
       this.fetchStationProches();
