@@ -34,7 +34,7 @@
           <b>{{schedule.hour}}h</b>
         </ion-col>
         <ion-col size="auto" align-self-start *ngFor="let minute of schedule.minutes">
-            {{minute}}
+            <span [class]="minute.classIsNow">{{minute.minute}}</span>
         </ion-col>
       </ion-row>
     </ion-grid>

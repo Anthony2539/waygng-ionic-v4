@@ -10,7 +10,11 @@ import { MyToastComponent } from '../../components/my-toast/my-toast.component';
 
 interface Schedule{
   hour:string;
-  minutes:string[];
+  minutes:Minute[];
+}
+interface Minute{
+  minute:string;
+  classIsNow?:string;
 }
 
 @Component({
@@ -60,7 +64,10 @@ export class SchedulePage implements OnInit {
       stopTimes.forEach((stopTime:SpotTime) => {
         const time = moment(stopTime.departure_time, "HH:mm:ss");
         let hour = time.format("HH");
-        const minute = time.format("mm");
+        const min = time.format("mm");
+        const minute:Minute = {
+          minute:min
+        }
         let foundHour = _.find(this.schedules,{hour:hour});
         if(!foundHour){
          this.schedules.push({hour:hour, minutes:[minute]})
@@ -69,12 +76,39 @@ export class SchedulePage implements OnInit {
         }
       });
       this.schedules = _.orderBy(this.schedules ,['hour'], ['asc']); 
+      this.colorNextTime();
       this.loading = false;
     },
     (err) => {
       this.myToast.createToast("ERROR_IMPOSSIBLE_LOAD_SCHEDULE", 'top');
       this.loading = false;
     });
+  }
+
+  colorNextTime(){
+    const now = moment();
+    const nowHour = now.format("HH");
+    const nowMinute = now.format("mm");
+    const foundSchedule:Schedule = _.find(this.schedules, {hour:nowHour});
+    if(foundSchedule && foundSchedule.minutes && foundSchedule.minutes.length > 0){
+      let found:boolean = false;
+      foundSchedule.minutes.forEach((min:Minute, index:number) => {
+        if(index > 0){
+          if(!found && _.inRange(Number(nowMinute),  Number(foundSchedule.minutes[index-1].minute), Number(min.minute))){
+            min.classIsNow = "isNow";
+            found = true;
+          }
+        }
+      });
+      if(!found){
+       const index = _.indexOf(this.schedules, foundSchedule);
+       if(index < this.schedules.length - 1){
+         if(this.schedules[index].minutes.length > 0){
+          this.schedules[index].minutes[0].classIsNow = "isNow";
+         }
+       }
+      }
+    }
   }
 
   goBack(){
