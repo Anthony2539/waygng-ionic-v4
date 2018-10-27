@@ -118,6 +118,7 @@ export class StationPage implements OnInit {
                       }
                     });
                   }
+                  this.checkIfTempsAttenteInFavoris();
                 }
               }
             );
@@ -161,11 +162,12 @@ checkIfTempsAttenteInFavoris(){
   this.userService.getUser().pipe(take(1)).subscribe((user:User) => {
     if(user.favs && user.favs.length > 0){
       this.listeTemps.forEach((temps:TempsAttente) =>{
-        user.favs.forEach((fav:Favoris) => {
-          if(temps.idArret == fav.idArret && temps.sensAller == fav.sensAller && temps.idLigne == fav.idLigne){
-            temps.isInfavoris = true;
-          }
-        });
+        const found = _.find(user.favs,{sensAller:temps.sensAller, idLigne:temps.idLigne});
+        if(found){
+          temps.isInfavoris = true;
+        }else{
+          temps.isInfavoris = false;
+        }
       });
     }
   });

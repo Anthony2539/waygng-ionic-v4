@@ -56,7 +56,7 @@ export class HomePage {
   ngOnInit() {
     this.ga.trackView('Home page');
     this.platform.ready().then(() => { 
-      this.showInterstitialAd();
+      //this.showInterstitialAd();
       this.fetchStationProches();
       this.getFavoris();
     });
