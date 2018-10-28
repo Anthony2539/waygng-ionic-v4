@@ -98,15 +98,26 @@ export class SchedulePage implements OnInit {
             min.classIsNow = "isNow";
             found = true;
           }
+        }else{
+          if(Number(nowMinute) <= Number(min)){
+            min.classIsNow = "isNow";
+            found = true;
+          }
         }
       });
       if(!found){
-       const index = _.indexOf(this.schedules, foundSchedule);
-       if(index < this.schedules.length - 1){
-         if(this.schedules[index].minutes.length > 0){
-          this.schedules[index].minutes[0].classIsNow = "isNow";
-         }
-       }
+        if(Number(foundSchedule.minutes[foundSchedule.minutes.length-1].minute) <= Number(nowMinute)){
+          const index = _.indexOf(this.schedules, foundSchedule);
+          if(index < this.schedules.length - 1){
+            if(this.schedules[index+1].minutes.length > 0){
+              this.schedules[index+1].minutes[0].classIsNow = "isNow";
+            }
+          }else{
+            if(this.schedules[0].minutes.length > 0){
+              this.schedules[0].minutes[0].classIsNow = "isNow";
+            }
+          }
+        }
       }
     }
   }
