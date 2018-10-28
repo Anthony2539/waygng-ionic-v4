@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.waygetandgo" version="3.0.9" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.waygetandgo" version="3.0.10" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Waygng</name>
     <description>consulter les prochains horaires de passage à la station</description>
     <author email="riefolo.anthony@gmail.com" href="http://ionicframework.com/">Anthony Riefolo</author>
@@ -83,8 +83,6 @@
     <allow-navigation href="http://10.21.20.25:8100" sessionid="3291a3fb" />
     <allow-navigation href="http://192.168.1.11:8100" sessionid="abc72d36" />
     <allow-navigation href="http://192.168.20.150:8100" sessionid="517403a0" />
-    <engine name="browser" spec="^5.0.4" />
-    <engine name="ios" spec="4.5.5" />
     <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
     <plugin name="cordova-plugin-device" spec="^2.0.2" />
     <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />
@@ -109,4 +107,6 @@
     </plugin>
     <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />
     <plugin name="cordova-plugin-nativestorage" spec="^2.3.2" />
+    <engine name="browser" spec="^5.0.4" />
+    <engine name="ios" spec="4.5.5" />
 </widget>
