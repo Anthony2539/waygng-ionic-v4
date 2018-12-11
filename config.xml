@@ -100,7 +100,6 @@
     </plugin>
     <plugin name="cordova-plugin-google-analytics" spec="^1.8.6" />
     <plugin name="cordova-plugin-app-version" spec="^0.1.9" />
-    <plugin name="cordova-plugin-admob-free" spec="^0.18.0" />
     <plugin name="cordova-plugin-apprate" spec="^1.4.0" />
     <plugin name="cordova-android-play-services-gradle-release" spec="^1.4.4">
         <variable name="PLAY_SERVICES_VERSION" value="15.+" />

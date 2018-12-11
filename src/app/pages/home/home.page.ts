@@ -10,7 +10,6 @@ import { StationAttente } from '../../models/station-attente';
 import { TempsAttente } from '../../models/temps-attente';
 import { Router } from '@angular/router';
 import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
-import { AdMobFree , AdMobFreeInterstitialConfig} from '@ionic-native/admob-free/ngx';
 import { Favoris } from '../../models/favoris';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
@@ -42,7 +41,6 @@ export class HomePage {
   constructor(
     private platform: Platform,
     private ga: GoogleAnalytics,
-    private adMobFree: AdMobFree,
     public auth: AuthService,
     private router: Router,
     public myToast: MyToastComponent,
@@ -56,27 +54,9 @@ export class HomePage {
   ngOnInit() {
     this.ga.trackView('Home page');
     this.platform.ready().then(() => { 
-      //this.showInterstitialAd();
       this.fetchStationProches();
       this.getFavoris();
     });
-  }
-
-  showInterstitialAd(){
-    let interstitialConfig: AdMobFreeInterstitialConfig = {};
-    if(this.platform.is('android')) {
-
-    } else if (this.platform.is('ios')) {
-      interstitialConfig = {
-        id:'ca-app-pub-6685491124399341/4886403246',
-        isTesting: false,
-        autoShow: true
-       }
-       
-      this.adMobFree.interstitial.config(interstitialConfig);
-      this.adMobFree.interstitial.prepare();
-    }
-
   }
 
 
