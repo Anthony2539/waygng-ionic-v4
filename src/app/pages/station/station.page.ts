@@ -148,7 +148,7 @@ export class StationPage implements OnInit {
 checkIfInFavoris(){
   this.userService.getUser().pipe(take(1)).subscribe((user:User) => {
     if(user.favs && user.favs.length > 0){
-      const found = _.find(user.favs, {station:this.station});
+      const found = _.find(user.favs, {isStation: true, station:this.station});
       if(found){
         this.isInfavoris = true;
       }else{
