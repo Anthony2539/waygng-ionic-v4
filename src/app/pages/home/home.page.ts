@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, List } from '@ionic/angular';
+import { Platform, IonList } from '@ionic/angular';
 import { AuthService } from '../../services/auth.service';
 import { Station } from '../../models/station';
 import { MyToastComponent } from '../../components/my-toast/my-toast.component';
@@ -24,7 +24,7 @@ import * as _ from 'lodash';
 
 export class HomePage {
 
-  @ViewChild('slidingList') slidingList: List;
+  @ViewChild('slidingList') slidingList: IonList;
   
   loadFavoris: boolean = false;
   favorisTemps: FavorisTemps[] = [];

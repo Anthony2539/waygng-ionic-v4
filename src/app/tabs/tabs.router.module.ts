@@ -2,11 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { TabsPage } from './tabs.page';
-import { HomePage } from '../pages/home/home.page';
-import { SearchPage } from '../pages/search/search.page';
-import { MapPage } from '../pages/map/map.page';
-import { InfoPage } from '../pages/info/info.page';
-import { TarifPage } from '../pages/tarif/tarif.page';
 
 
 const routes: Routes = [
@@ -16,49 +11,73 @@ const routes: Routes = [
     children: [
       {
         path: 'home',
-        outlet: 'home',
-        component: HomePage
+        children: [
+                   {
+                     path: '',
+                     loadChildren: '../pages/home/home.module#HomePageModule'
+                   }
+                  ]
       },
       {
         path: 'search',
-        outlet: 'search',
-        component: SearchPage
+        children: [
+          {
+            path: '',
+            loadChildren: '../pages/search/search.module#SearchPageModule'
+          }
+         ]
       },
       {
         path: 'map',
-        outlet: 'map',
-        component: MapPage
+        children: [
+          {
+            path: '',
+            loadChildren: '../pages/map/map.module#MapPageModule'
+          }
+         ]
       },
       {
         path: 'map/:id',
-        outlet: 'map',
-        component: MapPage
+        children: [
+          {
+            path: '',
+            loadChildren: '../pages/map/map.module#MapPageModule'
+          }
+         ]
       },
       {
         path: 'info',
-        outlet: 'info',
-        component: InfoPage
+        children: [
+          {
+            path: '',
+            loadChildren: '../pages/info/info.module#InfoPageModule'
+          }
+         ]
       },
       {
         path: 'tarif',
-        outlet: 'tarif',
-        component: TarifPage
+        children: [
+          {
+            path: '',
+            loadChildren: '../pages/tarif/tarif.module#TarifPageModule'
+          }
+         ]
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/(home:home)',
+    redirectTo: '/tabs/home',
     pathMatch: 'full'
   },
   { 
     path: 'search',
-    redirectTo: '/tabs/(search:search)',
+    redirectTo: '/tabs/search',
     pathMatch: 'full'
   },
   {
     path: 'map/:id',
-    redirectTo: '/tabs/(map:map/:id)',
+    redirectTo: '/tabs/map',
     pathMatch: 'full'
   }
 ];
