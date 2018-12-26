@@ -77,7 +77,7 @@ const routes: Routes = [
   },
   {
     path: 'map/:id',
-    redirectTo: '/tabs/map',
+    redirectTo: '/tabs/map/:id',
     pathMatch: 'full'
   }
 ];

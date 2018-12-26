@@ -4,7 +4,7 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
-    <div *ngIf="isErrorLocation" class="warning-container">{{ 'WARNING.ACTIVE_YOUR_LOCALISATION' | translate }}</div>
-    <div class="map_canvas" [attr.id]="myMapId"></div>
-</ion-content>
+
+<div *ngIf="isErrorLocation" class="warning-container">{{ 'WARNING.ACTIVE_YOUR_LOCALISATION' | translate }}</div>
+<div class="map_canvas" [attr.id]="myMapId"></div>
+

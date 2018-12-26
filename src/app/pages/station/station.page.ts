@@ -51,6 +51,10 @@ export class StationPage implements OnInit {
     this.location.back();
   }
 
+  goMap(station:Station){
+    this.router.navigate(['tabs/map', { id: station.id}]);
+  }
+
   doRefresh(refresher) {
     this.fetchStationTemps(refresher);
   }
